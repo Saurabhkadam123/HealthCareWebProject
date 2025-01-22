@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Log In</title>
+	<style>
+body {
+	margin: 0px;
+	padding: 0px;
+	background-size: cover; background-repeat : no-repeat; height : 100vh;
+	background-image: url(#{request.contextPath}/images/02.png);
+	background-repeat: no-repeat;
+	height: 100vh;
+}
+
+.navbar {
+	background-color: #3090C7;
+	color: #fff;
+	padding: 20px 20px;
+}
+
+.nav-brand {
+	font-size: 25px;
+	font-style: italic;
+	font-weight: bold;
+	text-decoration: none;
+	color: #fff;
+}
+
+input[type=text]:focus {
+	transition: width 0.4s ease-in-out;
+}
+
+.pi {
+	padding: 1rem;
+	font-size: 1rem
+}
+
+#frm1 {
+	margin-left: 120px;
+	margin-top: 10px;
+}
+
+.signupForm {
+	background-color: white;
+	margin-left: 120px;
+	margin-top: 10px;
+	box-shadow: 10px 10px 5px darkgrey;
+	width: 450px;
+	border: 2px solid lightgrey;
+	border-radius: 30px 1px 1px 30px;
+	margin-left: 120px;
+	background-color: white;
+}
+</style>
+	<script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+</script>
+</h:head>
+<h:body>
+	<div>
+		<nav class="navbar"> <h:outputLink value="HomePage.xhtml"
+			class="nav-brand">Health Care</h:outputLink> </nav>
+		<f:facet name="last">
+			<h:outputStylesheet library="webjars"
+				name="font-awesome/5.12.0/css/all.min-jsf.css" />
+			<h:outputStylesheet library="webjars"
+				name="font-awesome/5.12.0/css/v4-shims.min-jsf.css" />
+		</f:facet>
+
+		<div class="signupForm">
+
+			<h:form id="frm">
+
+				<h1 style="color: Blue; width: 450px; margin-left: 30px;">
+					<b>Provider Login</b>
+				</h1>
+				<hr />
+				<br />
+				<br />
+				<div class="box">
+					<p:outputLabel value="Username" styleClass="col-fixed"
+						style="width:400px; margin-left:55px;">
+						<span style="color: red;"> * </span>
+					</p:outputLabel>
+					<div class="col">
+						<span class="pi pi-user"></span>
+						<p:inputText id="username" required="true"
+							label="Please Enter User Name" size="36"
+							requiredMessage="Please enter User name."
+							value="#{login.username}">
+							<f:validator validatorId="com.java.loginProvider.UserValidation" />
+						</p:inputText>
+						<p:watermark for="username" value="Username" />
+						<br />
+						<h:message for="username" style="color:red; margin-left:50px" />
+						 
+					</div>
+				</div>
+				<br />
+				<div class="box">
+					<p:outputLabel value="Password" styleClass="col-fixed"
+						style="width:400px; margin-left:55px;">
+						<span style="color: red;"> * </span>
+					</p:outputLabel>
+					<div class="col">
+						<span class="pi pi-lock"></span>
+						<p:password id="password" required="true"
+							label="Please Enter Password" size="34"
+							requiredMessage="Please enter  Password." maxlength="13"
+							value="#{login.password}" toggleMask="true">
+
+						</p:password>
+						<p:watermark for="password" value="Password " />
+						<br />
+						<h:message for="password" globalOnly="true"
+							style="color:red; margin-left:50px" />
+						 
+					</div>
+				</div>
+				<br />
+
+				<p:commandButton value="Login" id="Login" timeout="5"
+					action="#{lDao.validateOtp(login)}" ajax="false"
+					style="margin-left:50px" />
+
+				<p:commandButton value="Forgot Password" id="forgotpass"
+					immediate="true" action="Forget.xhtml" ajax="false"
+					style="margin-left:100px " />
+				<br />
+				<br />
+			</h:form>
+
+		</div>
+		<div>
+			<ui:include src="/Footer.xhtml" />
+		</div>
+	</div>
+</h:body>
+</html>

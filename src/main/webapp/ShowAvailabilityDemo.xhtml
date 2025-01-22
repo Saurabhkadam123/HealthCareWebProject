@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style>
+#footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+}
+
+#cancelButt {
+	color: red;
+}
+</style>
+	<script>
+function hideButtonColumns(){
+	alert('hii');
+	var currentStatus = document.getElementById("showForm:currentStatus_input").value;
+	alert(currentStatus);
+	var reScheduleCol=document.getElementById("showForm:showDataTable:reScheduleCol");
+	var cancelCol=document.getElementById("showForm:showDataTable:cancelCol");
+	var cancelDiv=document.getElementById("showForm:cancelDiv");
+	alert(cancelDiv);
+	if(currentStatus=="COMPLETED"){
+		alert('completed');
+		cancelDiv.style.display="none";
+	}
+	else if(currentStatus=="CANCELED"){
+		alert('canceled');
+		reScheduleCol.style.display="none";
+		cancelCol.style.display="none";
+	}
+	
+}
+</script>
+</h:head>
+<h:body>
+	<div>
+		<ui:include src="/Navbar.xhtml" />
+	</div>
+	<div align="center" id="mainDiv">
+	<p:growl id="infoMsg" />
+		<h:form id="showForm">
+			<div id="searchItems">
+				<p:selectOneMenu id="currentStatus" value="#{avlDao.currentStatus}"
+					valueChangeListener="#{avlDao.onCurrentStatusChange}"
+					onchange="submit()">
+					<f:selectItem itemLabel="Filter Records by Availability Status "
+						itemValue="#{null}" noSelectionOption="true" />
+					<f:selectItems value="#{avlDao.loadAvailabilityStatus()}" />
+				</p:selectOneMenu>
+			</div>
+			<h2>
+				<h:outputLabel value="#{avlDao.currentStatus}" />
+				AVAILABILITIES
+			</h2>
+			<p:growl id="infoMsg" showSummary="true" life="5000" />
+			<p:dataTable id="showDataTable" var="a"
+				value="#{avlDao.showAvailabilityDetails()}" paginator="true"
+				rows="5" widgetVar="availabilityTable"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink}
+                     {PreviousPageLink} {PageLinks} {NextPageLink}
+                     {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15">
+
+				<p:column headerText="availabilityId">
+					<f:facet name="header">AvailabilityID</f:facet>
+					<h:outputText value="#{a.availabilityId}" />
+				</p:column>
+				<p:column headerText="providerId">
+					<f:facet name="header">ProviderID</f:facet>
+					<h:outputText value="#{a.providerId}" />
+				</p:column>
+				<p:column headerText="availableDate">
+					<f:facet name="header">Available on</f:facet>
+					<h:outputText value="#{a.availableDate}">
+						<f:convertDateTime pattern="yyyy-MM-dd"
+							timeZone="#{avlDao.getTimeZone()}" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="startTime">
+					<f:facet name="header">Start Time</f:facet>
+					<h:outputText value="#{a.startTime}" />
+				</p:column>
+				<p:column headerText="endTime">
+					<f:facet name="header">End Time</f:facet>
+					<h:outputText value="#{a.endTime}" />
+				</p:column>
+				<p:column headerText="currentStatus">
+					<f:facet name="header">Current Status</f:facet>
+					<h:outputText value="#{a.currentStatus}" />
+				</p:column>
+				<p:column id="reScheduleCol">
+					<f:facet name="header">RESCHEDULE</f:facet>
+					<p:commandButton style="border-radius:10px;" id="reScheduleButton"
+						action="#{avlDao.searchProviderAvailabilityById(a.availabilityId)}"
+						value="RESCHEDULE" />
+				</p:column>
+				<div id="cancelDiv">
+					<p:column id="cancelCol">
+						<f:facet name="header">Cancel</f:facet>
+						<p:commandButton id="cancelButton"
+							style="background-color:rgb(204,0,0); border-radius:10px; "
+							action="#{avlDao.cancelProviderAvailability(a.availabilityId)}"
+							value="CANCEL" />
+					</p:column>
+				</div>
+
+			</p:dataTable>
+		</h:form>
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+
+	<div id="footer">
+		<ui:include src="/Footer.xhtml" />
+	</div>
+</h:body>
+</html>

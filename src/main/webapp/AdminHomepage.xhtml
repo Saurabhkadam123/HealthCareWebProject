@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<script type="text/javascript">
+
+window.history.forward();
+Function noBack(){
+	window.history.forward();
+}
+setTimeout("noBack()",2000);
+window.onunload=Function(){null};
+
+</script>
+
+
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+		crossorigin="anonymous" />
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+		crossorigin="anonymous"></script>
+
+	<style>
+body {
+	background-image:
+		url(https://lh3.googleusercontent.com/BH15N4oRLVsj3JEAPDdHUush1MFXgyk6XHfVbsSR_G16RDo1anNatj3wYzdprGZ_L9q_mcm8HA2Zkz4ET0pnhobwyB9u5pOE-BuHP7c);
+	display: flex;
+	justify-content: center;
+	margin-top: 2%;
+	align-items: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+}
+
+.Full {
+	background: #ffffff;
+	height: 80px;
+	width: 600px;
+}
+
+.pan {
+	color: black;
+	font-size: 0.5cm;
+}
+</style>
+	<h:body>
+
+		<f:facet name="last">
+			<h:outputStylesheet library="default" name="css/style.css" />
+		</f:facet>
+
+		<h1 style="color: black;">ADMIN HOMEPAGE</h1>
+		<div>
+			<h:form
+				style="position: absolute;
+                 top: 38px;
+                 right: 100px;">
+
+				<h:commandLink id="olduser" action="SendOtp.xhtml"
+					onclick="noBack();" class="btn btn-danger">
+					<h:outputText value="Logout"></h:outputText>
+				</h:commandLink>  &nbsp; &nbsp; &nbsp; &nbsp;
+					
+	<h:commandLink id="imageid" action="AddPharmacyDetail.xhtml"
+					class="pan">
+					<b><h:outputText value="Reset Password"></h:outputText></b>
+				</h:commandLink>
+				<h4></h4>
+			</h:form>
+
+
+			<h:form id="Member"
+				style="position: absolute;
+                top: 100px;
+                left: 400px;">
+				<br />
+				<br />
+				<br />
+				<h3 style="color: red;">Member</h3>
+				<br />
+
+
+				<h:commandButton style="margin-right:20px;" id="bt2"
+					action="AddPharmacyDetail.xhtml" class="btn btn-success">
+					<h:outputText value="Search and Enquiry"></h:outputText>
+				</h:commandButton>
+				<br />
+				<br />
+
+				<h:commandButton style="margin-right:20px;" id="bt3"
+					action="AddPharmacyDetail.xhtml" class="btn btn-success">
+					<h:outputText value="Update Member"></h:outputText>
+				</h:commandButton>
+
+
+			</h:form>
+
+
+
+
+
+			<h:form id="provider"
+				style="position: absolute;
+                top: 100px;
+                left: 100px;">
+				<br />
+				<br />
+				<br />
+				<h3 style="color: red;">Provider</h3>
+				<br />
+				<h:commandButton style="margin-right:20px;" id="bt1"
+					action="ShowAllForApproveProvider.xhtml" size="120"
+					class="btn btn-success">
+					<h:outputText value="Pending Review and Approve"></h:outputText>
+				</h:commandButton>
+
+
+				<br />
+				<br />
+
+				<h:commandButton style="margin-right:20px;" id="btb1"
+					action="ShowAllSuspendedP.xhtml" size="120"
+					class="btn btn-success">
+					<h:outputText value="Suspended Review and Approve"></h:outputText>
+				</h:commandButton>
+
+
+				<br />
+				<br />
+
+
+
+
+				<h:commandButton style="margin-right:20px;" id="bt2"
+					action="AddPharmacyDetail.xhtml" class="btn btn-success">
+					<h:outputText value="Search and Enquiry"></h:outputText>
+				</h:commandButton>
+				<br />
+				<br />
+
+				<h:commandButton style="margin-right:20px;" id="bt3"
+					action="AddPharmacyDetail.xhtml" class="btn btn-success">
+					<h:outputText value="Update Provider"></h:outputText>
+				</h:commandButton>
+
+
+			</h:form>
+
+
+
+			<h:form id="Claims"
+				style="position: absolute;
+                top: 100px;
+                left: 700px;">
+				<br />
+				<br />
+				<br />
+				<h3 style="color: red;">Claims</h3>
+				<br />
+
+
+				<h:commandButton style="margin-right:20px;" id="bt2"
+					action="AddPharmacyDetail.xhtml" class="btn btn-success">
+					<h:outputText value="Search Insurance Claims"></h:outputText>
+				</h:commandButton>
+				<br />
+				<br />
+
+				<h:commandButton style="margin-right:20px;" id="bt3"
+					action="AddPharmacyDetail.xhtml" class="btn btn-success">
+					<h:outputText value="Process Insurance Claims "></h:outputText>
+				</h:commandButton>
+
+
+			</h:form>
+
+			<h:form id="mis"
+				style="position: absolute;
+                top: 100px;
+                left: 1000px;">
+				<br />
+				<br />
+				<br />
+				<h3 style="color: red;">Pharmacy</h3>
+				<br />
+
+
+				<h:commandButton style="margin-right:20px;" id="bt2"
+					action="AddPharmacyDetail.xhtml" class="btn btn-success">
+					<h:outputText value="Review and Approve"></h:outputText>
+				</h:commandButton>
+				<br />
+				<br />
+
+
+				<h3 style="color: red;">Payment</h3>
+
+
+				<h:commandButton style="margin-right:20px;" id="bt3"
+					action="AddPharmacyDetail.xhtml" class="btn btn-success">
+					<h:outputText value="Payment to Hospitals "></h:outputText>
+				</h:commandButton>
+
+
+			</h:form>
+
+
+
+		</div>
+	</h:body>
+</h:head>
+</html>

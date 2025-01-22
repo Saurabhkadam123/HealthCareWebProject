@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style>
+body {
+	background-image: url("../Images/hero-bg.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	font-family: sans-serif;
+}
+
+#pageTitle1 {
+	Color: #FFFFFF;
+	background-color: #4682B4;
+	width: 70%;
+	border: 1px solid lightgrey;
+	height: 35px;
+	border-collapse: collapse;
+}
+</style>
+
+	<script>
+		function onBodyLoad() {
+			/* var selectedRadio = PF('mySelectName').getJQ().find(':checked').val(); */
+			var selectedRadio = $('[id^=myForm\\:radiox]:checked').val();
+			
+			var idSearchBoxDiv = document.getElementById('text1');
+			var textlabel = document.getElementById('myForm:textLabel');
+			
+			var dropdownlabel_1 = document
+					.getElementById('myForm:dropdownlabel_1');
+			var dropdown_1 = document.getElementById('myForm:dropdown1');
+			var startDate=document.getElementById("startDateDiv");
+			var endDate=document.getElementById("endDateDiv");
+
+			var searchButton = document.getElementById('myForm:searchButton');
+			var tableStruct = document.getElementById('myForm:allData');
+
+			
+			var error_msg = document.getElementById('myForm:errmsg');
+			var error_status = document.getElementById('myForm:errstatus');
+			var error_sDate = document.getElementById('myForm:sDate');
+			var error_eDate = document.getElementById('myForm:eDate');
+
+			
+			if (selectedRadio == "Claim Id"||selectedRadio == "Health Id") {
+
+				textlabel.innerHTML = selectedRadio + " : "
+				idSearchBoxDiv.style.display = 'block';
+				
+				dropdownlabel_1.style.display = 'none';
+				dropdown_1.style.display = 'none';
+				startDate.style.display = 'none';
+				endDate.style.display = 'none';
+				searchButton.style.display = 'block';
+				tableStruct.style.display = 'none';
+				
+				error_msg.style.display = 'none';
+				error_status.style.display = 'none';
+				error_sDate.style.display = 'none';
+				error_eDate.style.display = 'none';
+				
+
+			} else if (selectedRadio == "Status") {
+				/* alert('status') */
+				startDate.style.display = 'none';
+				endDate.style.display = 'none';
+				idSearchBoxDiv.style.display = 'none';
+				dropdownlabel_1.style.display = 'block';
+				dropdown_1.style.display = 'block';
+				searchButton.style.display = 'block';
+				tableStruct.style.display = 'none';
+
+				error_status.style.display = 'none';
+				error_sDate.style.display = 'none';
+				error_eDate.style.display = 'none';
+				
+
+			} else if (selectedRadio == "Date") {
+
+				idSearchBoxDiv.style.display = 'none';
+				
+				dropdownlabel_1.style.display = 'none';
+				dropdown_1.style.display = 'none';
+				startDate.style.display = 'block';
+				endDate.style.display = 'block';
+				searchButton.style.display = 'block';
+				tableStruct.style.display = 'none';
+				
+				error_status.style.display = 'none';
+				error_sDate.style.display = 'none';
+				error_eDate.style.display = 'none';
+
+			} else {
+				idSearchBoxDiv.style.display = 'none';
+				
+				dropdownlabel_1.style.display = 'none';
+				dropdown_1.style.display = 'none';
+				startDate.style.display = 'none';
+				endDate.style.display = 'none';
+				searchButton.style.display = 'block';
+				tableStruct.style.display = 'none';
+			}
+		}
+
+		function showTable() {
+			var tableStruct = document.getElementById('myForm:allData');
+			tableStruct.style.display = 'block';
+		}
+
+		 function emptySearchBox() {
+			var textfield = document.getElementById('myForm:textfield');
+			var dropdown_1 = document.getElementById('myForm:dropdown1');
+			var radios = document.getElementById('myForm:radios');
+			textfield.value = "";
+		}
+
+		function showDetails() {
+			var myval = $('[id^=myForm\\:radiox]:checked').val();
+			myval = "";
+		} 
+
+		function error() {
+			var error_msg = document.getElementById('myForm:errmsg');
+			var error_status = document.getElementById('myForm:errstatus');
+			var error_sDate = document.getElementById('myForm:sDate');
+			var error_eDate = document.getElementById('myForm:eDate');
+			
+			
+			error_msg.style.display='block';
+
+
+			var selectedRadio = $('[id^=myForm\\:radiox]:checked').val();
+			
+			 if (selectedRadio == "Status") {
+					/* alert('status') */
+				
+				error_status.style.display = 'block';
+				error_sDate.style.display = 'none';
+				error_eDate.style.display = 'none';
+				
+			 }else if (selectedRadio == "Date") {
+
+				 error_status.style.display = 'none';
+					error_sDate.style.display = 'block';
+					error_eDate.style.display = 'block';
+			 }
+
+			
+			
+		}
+		
+	</script>
+
+</h:head>
+
+<h:body id="saturn" onload="onBodyLoad()"
+	style="background-image: url(#{request.contextPath}/images/02.jpg); 
+  background-repeat: no-repeat;height: 600px;
+  background-size:cover;">
+	<f:facet name="last">
+		<h:outputStylesheet library="default" name="css/style.css" />
+	</f:facet>
+
+	<h:form id="myForm">
+		<div>
+			<center>
+				<h2 id="pageTitle1">Search Claims</h2>
+				<hr />
+				<br /> <br />
+
+				<!--code for radio button   -->
+				<h:outputText style="font-weight:bolder; font-size:20px"
+					value="Select search Criteria :" />
+				<br></br> <br /> <br />
+				<p:selectOneRadio style="font-weight:bolder" id="radiox"
+					valueChangeListener="#{claimDao.onSearchTypeChange}"
+					onchange="submit()" value="#{claimDao.searchType}"
+					onclick="emptySearchBox()">
+					<f:selectItem itemValue="Claim Id" itemLabel="Claim Id" />&nbsp;
+<!-- 					<f:selectItem itemValue="Provider Id" itemLabel="Provider Id" />&nbsp; -->
+					<f:selectItem itemValue="Health Id" itemLabel="Health Id" />&nbsp;
+					<f:selectItem itemValue="Status" itemLabel="Status" />&nbsp;
+					<f:selectItem itemValue="Date" itemLabel="Date" />&nbsp;
+				</p:selectOneRadio>
+				<br />
+
+				<!-- textbox   -->
+				<div id="text1" style="font-weight: bolder">
+					<h:outputText id="textLabel" value="Search Here :" />
+					<p:inputText id="textfield" value="#{claimDao.searchValue}"
+						onchange="submit()"
+						valueChangeListener="#{claimDao.onChangeSearchValue}"
+						maxlength="6" required="true" requiredMessage="Please Enter value">
+						<f:validator validatorId="com.java.claim.ClaimIdValidator" />
+					</p:inputText>
+					<br /> <br />
+					<h:message id="errmsg" for="textfield" style="color:red" />
+				</div>
+
+				<!-- dropdown for status  -->
+				<h:outputText style="font-weight:bolder" id="dropdownlabel_1"
+					value="Select Status :" />
+				<br />
+				<p:selectOneMenu id="dropdown1" value="#{claimDao.selectedStatus}"
+					valueChangeListener="#{claimDao.onStatusChange}"
+					onchange="submit()" required="true"
+					requiredMessage="Please Select Status" style="width:12rem">
+					<f:selectItem itemValue="" itemLabel="Select One  "
+						noSelectionOption="true" />
+					<f:selectItems value="#{claimDao.loadStatusValues()}" />
+				</p:selectOneMenu>
+				<h:message id="errstatus" for="dropdown1" style="color:red" />
+				<br />
+
+				<!-- code for date range  -->
+				<div id="startDateDiv">
+					<p:outputLabel value="Start Date :" style="font-weight:bolder" />
+					<p:datePicker id="startDate" value="#{claimDao.searchedStartDate}"
+						required="true" requiredMessage="Please Select Start Date"
+						valueChangeListener="#{claimDao.onSearchStartDateChange}"
+						readonlyInput="true" onchange="submit()"
+						maxdate="#{claimDao.todaysDate()}">
+						<f:validator validatorId="com.java.claim.ValidateStartDate" />
+					</p:datePicker>
+					<br /> <br />
+					<h:message id="sDate" for="startDate" style="color:red" />
+					<br />
+				</div>
+
+				<div id="endDateDiv">
+					<p:outputLabel value="End Date :" style="font-weight:bolder" />
+					<p:datePicker id="endDate" value="#{claimDao.searchedEndDate}"
+						required="true" requiredMessage="Please Select End Date"
+						valueChangeListener="#{claimDao.onSearchEndDateChange}"
+						readonlyInput="true" onchange="submit()"
+						maxdate="#{claimDao.todaysDate()}">
+						<f:validator validatorId="com.java.claim.ValidateEndDate" />
+					</p:datePicker>
+					<br />
+					<br />
+					<h:message id="eDate" for="endDate" style="color:red"></h:message>
+
+				</div>
+				<br />
+
+				<!--code for search button  -->
+				<p:commandButton id="searchButton" value="Search" process="@this"
+					onblur="showTable()" onfocus="error()"
+					style="background-color:#007aa5 ; padding:2px; width:100px ; color:black;
+            text-align: center; border-radius:5px; " />
+				<br /> <br />
+
+				<!-- Table to display information  -->
+				<p:dataTable id="allData" widgetVar="ProviderTable" var="c"
+					value="#{claimDao.showClaimDetailsNew()}"
+					emptyMessage="No Claims found with given criteria" paginator="true"
+					rows="5" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15">
+					<br />
+
+					<f:facet name="header">
+						<span>List of Claims</span>
+					</f:facet>
+
+					<p:column headerText="Claim Id" sortBy="#{c.claimId}">
+						<h:outputText value="#{c.claimId}" />
+					</p:column>
+
+					<p:column headerText="Provider ID" sortBy="#{c.pId}">
+						<h:outputText value="#{c.pId}" />
+					</p:column>
+
+					<p:column headerText="Recipient ID" sortBy="#{c.healthId}">
+						<h:outputText value="#{c.healthId}" />
+					</p:column>
+
+					<p:column headerText="Status" sortBy="#{c.status}">
+						<h:outputText value="#{c.status}" />
+					</p:column>
+
+					<p:column headerText="Claim Amount" sortBy="#{c.totalAmount}">
+						<h:outputText value="#{c.totalAmount}" />
+					</p:column>
+
+					<p:column headerText="Date" sortBy="#{c.date}">
+						<h:outputText value="#{c.date}" />
+					</p:column>
+
+				</p:dataTable>
+				<br />
+			</center>
+		</div>
+	</h:form>
+</h:body>
+</html>

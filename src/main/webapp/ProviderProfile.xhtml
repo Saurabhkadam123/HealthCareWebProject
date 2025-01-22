@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<style>
+.ui-analog-clock {
+	width: 200px;
+	margin-left: 1200px;
+}
+</style>
+	<script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+</script>
+</h:head>
+
+
+<h:body>
+	<div id="header">
+		<ui:include src="Navbar.xhtml"></ui:include>
+	</div>
+
+
+	<div>
+		<h1>Provider Profile</h1>
+		<p>Name : #{login.username}</p>
+	</div>
+
+
+	<h:form>
+		<p:growl id="message" showDetail="true" />
+		<p:commandButton value="LOGOUT" action="Login.xhtml"
+			icon="pi pi-power-off" update="message" styleClass="ui-button-danger">
+			<p:confirm header="Confirmation"
+				message="Are you sure you want to logout?"
+				icon="pi pi-exclamation-triangle" />
+		</p:commandButton>
+		&nbsp;&nbsp;
+		<p:commandButton style=" border-radius:10px; "
+						action="changePassword.xhtml"
+						value="CHANGE PASSWORD" ajax="false"/>
+
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+			responsive="true" width="350">
+			<p:commandButton value="No" type="button"
+				styleClass="ui-confirmdialog-no ui-button-flat" />
+			<p:commandButton value="Yes" type="button"
+				styleClass="ui-confirmdialog-yes" />
+		</p:confirmDialog>
+
+	</h:form>
+
+
+
+
+
+
+
+
+	<div>
+		<ui:include src="/Footer.xhtml" />
+	</div>
+</h:body>
+</html>

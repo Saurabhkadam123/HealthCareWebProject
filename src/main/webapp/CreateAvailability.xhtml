@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Create Availability</title>
+	<style>
+#timeDiv {
+	width: 73%;
+	padding-left: 123px;
+}
+
+#mainDiv {
+	text-align: center;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 10%;
+	margin-right: 40%;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	background-color: #fff;
+	border-radius: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 10%;
+	margin-right: 40%;
+	margin-top: 30px;
+	background-color: buttonface;
+	width: 500px;
+}
+
+#footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+}
+
+.marquee {
+	white-space: nowrap;
+	-webkit-animation: rightThenLeft 9s linear;
+	font-family: monospace;
+}
+
+#title {
+	font-family: sans-serif;
+	border-bottom-style: inset;
+}
+
+#marquee2 {
+	display: none;
+}
+</style>
+</h:head>
+<h:head>
+	<script>
+	// Main function
+	function onBodyLoadAction() {
+		let availableDate = document.getElementById("myForm:availableDate_input");
+		let multiAvailableDate = document.getElementById("myForm:multiAvailableDate_input");
+		let rangeAvailableDate = document.getElementById("myForm:rangeAvailableDate_input");
+		let startTime = document.getElementById("myForm:startTime");
+		let endTime = document.getElementById("myForm:endTime");
+		let marquee1=document.getElementById("marquee1");
+		let marquee2=document.getElementById("marquee2");
+		let createBut=document.getElementById("myForm:createButton");
+		let availabilityType = document.getElementById("myForm:availabilityType_input");
+		let availableDateDiv=document.getElementById("availableDate_div");
+		let multiAvailableDateDiv=document.getElementById("multiAvailableDate_div");
+		let rangeAvailableDateDiv=document.getElementById("rangeAvailableDate_div");
+
+		if(availabilityType.value=="SINGLE_DAY"){
+			
+			availableDateDiv.style.display="block";
+			multiAvailableDateDiv.style.display="none";
+			rangeAvailableDateDiv.style.display="none"; 
+			startTime.style.display="block";
+			endTime.style.display="block";
+			marquee1.style.display="none";
+			marquee2.style.display="block";
+		}
+		else if(availabilityType.value=="RANDOM_DAYS"){
+			
+			availableDateDiv.style.display="none";
+			multiAvailableDateDiv.style.display="block";
+			rangeAvailableDateDiv.style.display="none"; 
+			startTime.style.display="block";
+			endTime.style.display="block";
+			marquee1.style.display="none";
+			marquee2.style.display="block";
+		}
+		else if(availabilityType.value=="RECURING"){
+			
+			availableDateDiv.style.display="none";
+			multiAvailableDateDiv.style.display="none";
+			rangeAvailableDateDiv.style.display="block";
+			startTime.style.display="block";
+			endTime.style.display="block";
+			marquee1.style.display="none";
+			marquee2.style.display="block";
+		}else{
+			
+			availableDateDiv.style.display="none";
+			multiAvailableDateDiv.style.display="none";
+			rangeAvailableDateDiv.style.display="none";
+			startTime.style.display="none";
+			endTime.style.display="none";
+			marquee1.style.display="block";
+			marquee2.style.display="none";
+		}				
+	}
+	
+	function loadAvlDateType(){
+		let availabilityType = document.getElementById("myForm:availabilityType_input");
+		let availableDate = document.getElementById("myForm:availableDate_input");
+		let multiAvailableDate = document.getElementById("myForm:multiAvailableDate_input");
+		let rangeAvailableDate = document.getElementById("myForm:rangeAvailableDate_input");
+		let startTime = document.getElementById("myForm:startTime");
+		let endTime = document.getElementById("myForm:endTime");
+		let marquee1=document.getElementById("marquee1");
+		let marquee2=document.getElementById("marquee2");
+		let availableDateDiv=document.getElementById("availableDate_div");
+		let multiAvailableDateDiv=document.getElementById("multiAvailableDate_div");
+		let rangeAvailableDateDiv=document.getElementById("rangeAvailableDate_div");
+
+		if(availabilityType.value=="SINGLE_DAY"){
+			
+			availableDateDiv.style.display = "block";
+			multiAvailableDateDiv.style.display="none";
+			rangeAvailableDateDiv.style.display="none";
+			startTime.style.display="block";
+			endTime.style.display="block";
+			marquee1.style.display="none";
+			marquee2.style.display="block";
+		}
+		else if(availabilityType.value=="RANDOM_DAYS"){
+			
+			availableDateDiv.style.display = "none";
+			multiAvailableDateDiv.style.display="block";
+			rangeAvailableDateDiv.style.display="none";
+			startTime.style.display="block";
+			endTime.style.display="block";
+			marquee1.style.display="none";
+			marquee2.style.display="block";
+		}
+		else if(availabilityType.value=="RECURING"){
+			
+			availableDateDiv.style.display = "none";
+			multiAvailableDateDiv.style.display="none";
+			rangeAvailableDateDiv.style.display="block";
+			startTime.style.display="block";
+			endTime.style.display="block";
+			marquee1.style.display="none";
+			marquee2.style.display="block";
+		}
+		else{
+			marquee1.style.display="block";
+			marquee2.style.display="none";
+		}
+		
+	}
+
+</script>
+</h:head>
+<h:body onload="onBodyLoadAction()"
+	style="background-image: url(#{request.contextPath}/images/02.jpg); 
+  background-repeat: no-repeat;height: 600px;
+  background-size:cover;">
+	<div>
+		<ui:include src="/Navbar.xhtml" />
+	</div>
+	<div id="mainDiv" style="" align="center">
+		<h2 id="title">
+			<h:outputText value="Create Your Availability " />
+		</h2>
+		<h:form id="myForm">
+			<div id="marquee1" class="wrapper">
+				<marquee behavior="alternate"> <span class="marquee">
+					--- Select the availability type first --- </span></marquee>
+			</div>
+			<div id="marquee2" class="wrapper">
+				<marquee behavior="alternate"> <span class="marquee">---
+					Start and end time belongs to selected date ---</span></marquee>
+			</div>
+			<p:growl id="msgs" showDetail="true" life="6000" />
+			<!-- <p:growl id="selected" showDetail="true" life="5000" /> -->
+			<p:panel id="grid">
+				<p:focus context="grid" />
+				<p:selectOneMenu id="availabilityType"
+					value="#{provAvl.availabilityType}" required="true"
+					requiredMessage="Select availability type !" style="width:45%;"
+					valueChangeListener="#{avlDao.onAvailabilityTypeChange}"
+					onchange="submit()" onblur="loadAvlDateType()">
+					<f:selectItem itemLabel="Select Available Type" itemValue="#{null}"
+						noSelectionOption="true" />
+					<f:selectItems value="#{provAvl.loadAvailabilityTypes()}" />
+				</p:selectOneMenu>
+				<br />
+				<br />
+				<div id="availableDate_div">
+					<p:datePicker id="availableDate" value="#{provAvl.availableDate}"
+						readonlyInput="true" size="20" mindate="#{provAvl.todaysDate()}"
+						required="true" requiredMessage="select the available date !"
+						rendered="#{avlDao.isSingleAvailableDateShowable()}">
+						<p:ajax event="dateSelect" listener="#{provAvl.onAvlDateSelect}"
+							update="msgs" />
+					</p:datePicker>
+					<br />
+					<p:watermark for="availableDate" value="Select Single Date" />
+					<!-- <p:message for="availableDate"
+						rendered="#{avlDao.isSingleAvailableDateShowable()}" /> -->
+					<br />
+				</div>
+				<div id="multiAvailableDate_div">
+					<p:datePicker id="multiAvailableDate" selectionMode="multiple"
+						value="#{provAvl.multiAvailableDate}" readonlyInput="true"
+						size="20" mindate="#{provAvl.todaysDate()}" required="true"
+						requiredMessage="select the available date !"
+						rendered="#{avlDao.isMultiAvailableDateShowable()}">
+						<p:ajax event="dateSelect"
+							listener="#{provAvl.onMultiAvlDateSelect}" update="msgs" />
+					</p:datePicker>
+					<br />
+					<p:watermark for="multiAvailableDate" value="Select Multiple Date" />
+					<!-- <p:message for="multiAvailableDate"
+						rendered="#{avlDao.isMultiAvailableDateShowable()}" /> -->
+					<br />
+				</div>
+				<div id="rangeAvailableDate_div">
+					<p:datePicker id="rangeAvailableDate" selectionMode="range"
+						value="#{provAvl.rangeAvailableDate}" readonlyInput="true"
+						size="20" mindate="#{provAvl.todaysDate()}" required="true"
+						requiredMessage="select the available date !"
+						rendered="#{avlDao.isRecuringAvailableDateShowable()}">
+						<p:ajax event="dateSelect"
+							listener="#{provAvl.onMultiAvlDateSelect}" update="msgs" />
+					</p:datePicker>
+					<br />
+					<p:watermark for="rangeAvailableDate" value="Select Recuring Date " />
+					<!-- <p:message for="rangeAvailableDate"
+						rendered="#{avlDao.isRecuringAvailableDateShowable()}" /> -->
+					<br />
+				</div>
+				<div id="timeDiv">
+					<p:selectOneMenu id="startTime" value="#{provAvl.startTime}"
+						required="true" requiredMessage="Select start time ...">
+						<f:selectItem itemLabel="Select Start Time" itemValue="#{null}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{provAvl.loadTimings}" />
+					</p:selectOneMenu>
+					<br />
+					<p:selectOneMenu id="endTime" value="#{provAvl.endTime}"
+						required="true" requiredMessage="Select end time ...">
+						<f:selectItem itemLabel="Select End Time" itemValue="#{null}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{provAvl.loadTimings}" />
+					</p:selectOneMenu>
+				</div>
+				<p:commandButton id="createButton" value="CREATE"
+					style="margin:20px"
+					action="#{avlDao.createProviderAvailability(provAvl)}" ajax="false" />
+					&nbsp;&nbsp;&nbsp;
+			</p:panel>
+		</h:form>
+	</div>
+	<br />
+	<div id="footer">
+		<ui:include src="/Footer.xhtml" />
+	</div>
+</h:body>
+</html>

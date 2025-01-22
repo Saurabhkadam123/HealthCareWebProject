@@ -1,0 +1,158 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+
+<h:head>
+	<title>Provider Main Page</title>
+	<style>
+body {
+	margin: 0px;
+	padding: 0px;
+	background-image: url(#{request.contextPath}/image/02.jpg);
+}
+
+.navbar {
+	background-color: #3090C7;
+	color: #fff;
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 20px;
+}
+
+.navbar ul {
+	list-style-type: none;
+	display: flex;
+	margin: 0;
+	padding: 10px 20px;
+}
+
+.navbar li {
+	margin-right: 20px;
+}
+
+.navbar li:last-child {
+	margin-right: 0;
+}
+
+.nav-brand {
+	font-size: 25px;
+	font-style: italic;
+	font-weight: bold;
+	text-decoration: none;
+	color: #fff;
+}
+
+.navbar a {
+	color: black;
+	text-decoration: none;
+	font-weight: lighter;
+	/*text-transform: uppercase;*/
+	padding: 10px;
+	transition: all 0.2s ease-in-out;
+}
+
+.nav-link {
+	color: #fff;
+	text-decoration: none;
+	padding: 5px 10px;
+	border-radius: 5px;
+}
+
+.navbar a:hover {
+	background-color: #fff;
+	color: #333;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+	background-color: white;
+}
+
+.nav-link {
+	color: black;
+	cursor: pointer;
+}
+
+.container {
+	padding-left: 150px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	background-color: #fff;
+	border-radius: 10px;
+	margin-top: 100px;
+	margin-left: 100px;
+	margin-right: 450px;
+}
+
+/* this is for h1*/
+.container h1 {
+	color: #2c4964;
+	text-shadow: 2px 2px 5px #2F4F4F;
+}
+
+.container h4 {
+	color: black;
+}
+
+</style>
+	<!-- <link rel="stylesheet" href="HamburgerButton.css"/> -->
+
+</h:head>
+
+<h:body>
+	<div>
+		<nav class="navbar">
+			<h:outputLink value="AfterSignup.xhtml" class="nav-brand">Health Care</h:outputLink>
+			<ul>
+
+				<li class="dropdown"><h:outputLink value="#" class="nav-link">Enrollment</h:outputLink>
+					<div class="dropdown-content">
+						<h:outputLink value="Add.xhtml">Signup as Provider</h:outputLink>
+						<h:outputLink value="Login.xhtml">Login as provider</h:outputLink>
+						 
+					</div></li>
+
+				<li><h:outputLink value="Summary.xhtml">Summary</h:outputLink></li>
+				<li><h:outputLink value="ProviderContactUs.xhtml">Contact Us</h:outputLink></li>
+			</ul>
+
+		</nav>
+		
+		<div class="container">
+		<h1>Signed in</h1>
+		<h4>Your details have been submitted.</h4>
+		<h4>After verification of your details an auto generated OTP will be sent to your email address.</h4>
+			 
+			<h:outputLink value="HomePage.xhtml">Return to home page</h:outputLink>
+	</div>
+		
+
+		<div>
+			<ui:include src="/Footer.xhtml" />
+		</div>
+	</div>
+</h:body>
+
+</html>

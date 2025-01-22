@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+
+	<title>Add Procedure</title>
+	<style>
+body {
+	background: skyblue;
+}
+
+#card {
+	margin-left: 180px;
+	margin-right: 180px;
+	margin-top: 30px;
+	padding-left: 1%;
+	padding-right: 1%;
+	padding-top: 0.1%;
+	padding-bottom: 1%;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	background-color: #fff;
+	border-radius: 10px;
+}
+
+#pageHeader {
+	text-align: center;
+	margin-left: 35%;
+	color: red;
+}
+
+#pDiv {
+	width: 47%;
+	float: left;
+	padding: 0.5%;
+	font-size: 17px;
+}
+
+#frm1 {
+	width: 97%;
+	float: left;
+	padding: 1%;
+}
+
+.innerdiv {
+	cellpadding: 2px;
+	margin-left: 8%;
+	margin-right: 2%;
+	margin-top: 0.1%;
+	margin-bottom: 0.1%;
+	padding-left: 4%;
+	padding-right: 0.1%;
+	padding-top: 0.1%;
+	padding-bottom: 0.3%;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	background-color: #fff;
+	border-radius: 10px;
+}
+
+.divisor {
+	margin-left: 8%;
+	margin-right: 2%;
+	margin-top: 0.1%;
+	margin-bottom: 0.1%;
+	padding-left: 4%;
+	padding-right: 0.1%;
+	padding-top: 0.1%;
+	padding-bottom: 0.3%;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	background-color: #fff;
+	border-radius: 10px;
+	height: 75px;
+}
+
+#div1 {
+	height: 470px;
+}
+
+#otherDiv {
+	height: 380px;
+}
+</style>
+</h:head>
+
+<h:body>
+	<div>
+		<ui:include src="/Navbar.xhtml" />
+	</div>
+	<div id="card">
+
+		<h:form id="Date">
+			<h2>
+				<span id="pageHeader"> ADD PROCEDURE</span>
+			</h2>
+			<div class="divisor">
+				<br />
+
+				<div id="pDiv">
+					<b>ProviderID</b>
+					<p:outputLabel value="#{providerInfo.providerId}"
+						style="margin-left:20px" />
+				</div>
+
+				<div id="pDiv">
+					<b>ProviderType</b>
+					<h:outputFormat value="#{providerInfo.specialization}"
+						style="margin-left:20px" />
+				</div>
+				<br />
+			</div>
+			<br />
+			<br />
+
+
+			<div class="innerdiv" id="div1">
+				<br />
+				<div id="frm1">
+					<b>HealthId</b> <span style="color: red;"> * </span>
+					<p:selectOneMenu value="#{procedure.healthId}" id="healthId"
+						required="true"
+						valueChangeListener="#{procDao.onRecipientIdChange}"
+						requiredMessage="Please enter healthId" onchange="submit()"
+						style="margin-left:75px">
+						<f:selectItem itemLabel="Select healthId " itemValue="#{null}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{procDao.loadRecipientIds()}" />
+					</p:selectOneMenu>
+					<br/>
+					<h:message for="healthId"  id="err5" style="color:red;" />
+				</div>
+				
+				<h:panelGroup id="aaa" rendered="#{procDao.isFormShowable()}">
+					<div id="frm1">
+						<b>RecipientFirstName</b>
+						<h:outputText value="#{recipientInfo.recipientfirstName}"
+							style="margin-left:15px" />
+					</div>
+					<br />
+
+					<div id="frm1">
+						<b>RecipientLastName</b>
+						<h:outputText value="#{recipientInfo.recipientlastName}"
+							style="margin-left:18px" />
+					</div>
+
+					<div id="frm1">
+						<b>RecipientDOB</b>
+						<h:outputText value="#{recipientInfo.recipientDob}"
+							style="margin-left:53px">
+							<f:convertDateTime pattern="yyyy-MM-dd" />
+						</h:outputText>
+					</div>
+					<br />
+
+					<div id="frm1">
+						<b>RecipientMobileNum</b>
+						<h:outputText value="#{recipientInfo.recipientmobileNo}"
+							style="margin-left:10px" />
+					</div>
+					<br />
+
+					<div id="frm1">
+
+						<b>ProcedureType</b> <span style="color: red;"> * </span>
+						<p:selectOneMenu value="#{procedure.procedureType}"
+							required="true" requiredMessage="Please enter proceduretype"
+							id="procedureType"
+							valueChangeListener="#{procDao.onProblemTypeChange}"
+							onchange="submit()" style="margin-left:30px">
+							<f:selectItem itemLabel="Select proceduretype "
+								itemValue="#{null}" noSelectionOption="true" />
+							<f:selectItems value="#{procedure.loadProcedureType()}" />
+						</p:selectOneMenu>
+						<br />
+						<h:message for="procedureType" id="err" style="color:red;"
+							margin-left="40px;" />
+					</div>
+					<br />
+
+					<div id="frm1">
+						<b>ProcedureCode</b>
+						<p:outputLabel id="procedureCode"
+							value="#{procedure.procedureCode}" style="margin-left:48px" />
+						<br />
+					</div>
+
+					<div id="frm1">
+
+						<b>MedicineName</b> <span style="color: red;"> * </span>
+						<p:selectOneMenu value="#{procedure.medicineName}" required="true"
+							requiredMessage="Please enter Medicinename" id="medicineName"
+							valueChangeListener="#{procDao.onMedicineNameChange}"
+							onchange="submit()" style="margin-left:30px">
+							<f:selectItem itemLabel="Select Medicine " itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{procDao.loadMedicineName()}" />
+						</p:selectOneMenu>
+						<br />
+						<h:message for="medicineName" style="color:red;" id="err1" />
+					</div>
+
+
+					<div id="frm1">
+
+						<b>Quantity</b> <span style="color: red;"> * </span>
+						<p:inputNumber id="quantity" required="true"
+							label="Please Enter quantity" maxlength="2" size="20"
+							requiredMessage="Please enter quantity"
+							value="#{procedure.quantity}" style="margin-left:70px"
+							validatorMessage="Invalid!Please enter valid value" minValue="1">
+							<f:validateLength minimum="1" maximum="2" />
+							<p:tooltip id="toolTipFocus7" for="quantity"
+								value="Enter quantity" showEffect="clip" hideEffect="fold"
+								position="top" />
+						</p:inputNumber>
+						<br />
+						<h:message for="quantity" style="color:red;" id="err2" />
+					</div>
+				</h:panelGroup>
+			</div>
+			<br />
+			<br />
+
+			<div class="divisor" id="otherDiv">
+				<br />
+				<h:panelGrid columns="2" cellpadding="1" styleClass="mb-3">
+
+					<b>ProcedureBeginDate</b>
+					<span style="color: red;"> * </span>
+					<p:datePicker id="procedureBeginDate"
+						value="#{procedure.procedureBeginDate}" required="true"
+						requiredMessage="Please enter date" monthNavigator="true"
+						mindate="#{provAvl.todaysDate()}" yearNavigator="true" showWeek="true">
+						<f:validator validatorId="com.java.prescription.SaveBeginDate" />
+					</p:datePicker>
+					<br />
+					<h:message for="procedureBeginDate" style="color:red;" id="err3" />
+
+					<br />
+
+					<b>ProcedureEndDate</b>
+					<span style="color: red;"> * </span>
+					<p:datePicker id="procedureEndDate"
+						value="#{procedure.procedureEndDate}" required="true"
+						requiredMessage="Please enter date" monthNavigator="true"
+						yearNavigator="true" showWeek="true">
+						<f:validator validatorId="com.java.prescription.ValidateDate" />
+					</p:datePicker>
+					<br />
+					<h:message for="procedureEndDate" style="color:red;" id="err4" />
+					<br />
+
+					<b>ProcedureDescription</b>
+					<span style="color: red;"> * </span>
+					<p:inputTextarea cols="30" rows="5" id="procedureDescription"
+						required="true" label="Please Enter procedureDescription"
+						maxlength="40" requiredMessage="Please enter proceduredescription"
+						value="#{procedure.procedureDescription}">
+						<p:tooltip id="toolTipFocus9" for="procedureDescription"
+							value="Enter procedureDescription" showEffect="clip"
+							hideEffect="fold" position="top" />
+					</p:inputTextarea>
+					<br />
+					<br />
+					<h:message for="procedureDescription" style="color:red;" id="err6" />
+					<br />
+				</h:panelGrid>
+			</div>
+
+			<br />
+			<p:commandButton value="Submit" styleClass="btn btn-primary "
+				style="margin-left:400px;"
+				action="#{procDao.addProcedure(procedure)}"
+				update="err,err1,err2,err3,err4,err5,err6" />
+
+		</h:form>
+	</div>
+</h:body>
+</html>

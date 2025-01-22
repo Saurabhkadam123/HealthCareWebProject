@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Update Availability</title>
+	<style>
+#title {
+	font-family: sans-serif;
+	border-bottom-style: inset;
+	padding-top: 0%;
+	padding-bottom: 0%;
+}
+
+#footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	margin-left: 0;
+}
+
+#mainDiv {
+	text-align: center;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 10%;
+	margin-right: 40%;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	background-color: #fff;
+	border-radius: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 10%;
+	margin-right: 40%;
+	margin-top: 20px;
+	background-color: buttonface;
+	width: 370px;
+}
+
+#UPDATE {
+	background-color: rgb();
+}
+</style>
+</h:head>
+<h:body
+	style="background-image: url(#{request.contextPath}/images/02.jpg); 
+  background-repeat: no-repeat;
+  background-size: cover;">
+	<div>
+		<ui:include src="/Navbar.xhtml" />
+	</div>
+	<div id="mainDiv" align="center">
+		<h:form id="myForm">
+			<p:growl id="updtMsg" showDetail="true" life="5000" />
+
+			<h:panelGrid id="panel" columns="2" border="1" cellpadding="10"
+				cellspacing="1">
+
+				<f:facet name="header">
+					<h5 id="title">
+						<p:outputLabel value="Edit Your Availability" />
+					</h5>
+				</f:facet>
+				<p:outputLabel value="Availability Id :" />
+				<p:outputLabel value="#{availabilityFound.availabilityId}"
+					readonly="true" />
+
+				<p:outputLabel value="AvailableDate:" />
+				<p:datePicker id="availableDate"
+					value="#{availabilityFound.availableDate}" required="true"
+					requiredMessage="Select available date ..."
+					mindate="#{provAvl.todaysDate()}">
+					<p:ajax event="dateSelect" listener="#{avlDao.onAvlDateSelect}"
+						update="updtMsg" />
+				</p:datePicker>
+
+				<p:outputLabel value="Start Time :" />
+				<p:selectOneMenu id="startTime"
+					value="#{availabilityFound.startTime}" required="true"
+					requiredMessage="Select start time ...">
+					<f:selectItem itemLabel="Select Start Time" itemValue="#{null}"
+						noSelectionOption="true" />
+					<f:selectItems value="#{provAvl.loadTimings}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="End Time :" />
+				<p:selectOneMenu id="endTime" value="#{availabilityFound.endTime}"
+					required="true" requiredMessage="Select end time ...">
+					<f:selectItem itemLabel="Select End Time" itemValue="#{null}"
+						noSelectionOption="true" />
+					<f:selectItems value="#{provAvl.loadTimings}" />
+					<f:validateRequired />
+				</p:selectOneMenu>
+
+				<f:facet name="footer">
+					<h:panelGroup style="display:block; text-align:center">
+						<h:commandButton id="BACK" value="BACK"
+							style="background-color: rgb(30,144,255);border: none; color:white;
+							border-radius:10px; padding: 10px 20px; text-align: center;text-decoration: none;display: inline-block;font-size: 16px;"
+							action="ShowAvailabilities.xhtml" />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<h:commandButton id="UPDATE" value="UPDATE"
+							style="background-color: rgb(30,144,255);border: none; color:white;
+							border-radius:10px;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;"
+							action="#{avlDao.updateProviderAvailability(availabilityFound)}" />
+					</h:panelGroup>
+				</f:facet>
+			</h:panelGrid>
+
+		</h:form>
+		<br />
+
+
+	</div>
+	<div id="footer">
+		<ui:include src="/Footer.xhtml" />
+	</div>
+
+</h:body>
+
+</html>

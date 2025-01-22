@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+	<meta http-equiv="refresh" content="8;url=ShowAllForApproveProvider.xhtml" />
+<!-- <style>
+	body {
+	background-color: AZURE;
+	background-image:url(https://www.dreamstime.com/medicine-health-care-professional-doctor-hand-working-mode-modern-computer-interface-technology-image100552699.jpg);
+}
+</style> -->
+</h:head>
+
+
+<h:body style="background-image:url(../image/doctor01.PNG);backdrop-filter:blur(2px);">
+
+	<center>
+		<h1 style="border-color: red">Provider Approved Successfully</h1>
+	</center>
+
+	<div
+		style="border: 2px solid black; border-radius: 20px; background-color:aqua;">
+		<center>
+			 
+			<p style="font-family: cursive;" />
+			    For Mr/Mrs
+
+			<p:outputLabel value="#{oneProvider.fristName}" style="color:red" />
+			     All Records are match for Provider. Details are Provider Licence
+			ID are
+			<p:outputLabel value="#{oneProvider.licenseId}" style="color:red" />
+
+
+
+			 
+			<h3>Provider will recive all documnets on registered mail Id</h3>
+
+
+
+
+			 <br /> 
+		</center>
+	</div>
+</h:body>
+</html>

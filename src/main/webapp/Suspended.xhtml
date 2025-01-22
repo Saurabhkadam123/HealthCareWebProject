@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="refresh" content="8;url=Add.xhtml" />
+</h:head>
+<h:body
+	style="background-image:url(../image/doctor01.PNG);backdrop-filter:blur(2px);">
+	<center>
+		<h1>This Provider are Suspended</h1>
+	</center>
+	<div
+		style="border: 2px solid black; border-radius: 20px; background-color: aqua;">
+		<center>
+			 
+			<p style="font-family: cursive;" />
+			    For Mr/Mrs 
+			<p:outputLabel value="#{oneProvider.fristName}" style="color:red" />
+			     Required documents are not match for provider. Licence ID is
+			<p:outputLabel value="#{oneProvider.licenseId}" style="color:red" />
+
+			<h3>Provider will recive all details on registered mail Id</h3>
+
+			 <br /> 
+		</center>
+	</div>
+</h:body>
+</html>

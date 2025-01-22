@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+ <h:head>
+ 
+	<style>
+body {
+	margin: 0px;
+	padding: 0px;
+	background-size: cover no-repeat;
+	background-image: url(#{request.contextPath}/image/02.jpg);
+}
+body .ui-panel .ui-panel-content {
+	color: #000000;
+	overflow: auto;
+	border: 1px solid darkgrey;
+	border-radius: 30px 1px 1px 30px;
+}
+
+input[type=text]:focus {
+	transition: width 0.4s ease-in-out;
+}
+
+.signupForm {
+	margin-right: 120px;
+	margin-top: 50px;
+	box-shadow: 10px 10px 5px darkgrey;
+	width: 500px;
+	border-radius: 20px;
+}
+</style>
+</h:head>
+<h:body>
+	<!-- <f:facet name="last">
+		<h:outputStylesheet library="default" name="css/style.css" />
+		<h:outputStylesheet library="webjars"
+			name="font-awesome/5.12.0/css/all.min-jsf.css" />
+		<h:outputStylesheet library="webjars"
+			name="font-awesome/5.12.0/css/v4-shims.min-jsf.css" />
+	</f:facet> -->
+
+ <center>
+  
+<div class="signupForm">
+			<h:form>
+
+				<p:panel id="panel-signup">
+
+					<!-- enable focus component -->
+		.		<p:focus context="panel-signup" />
+
+				<!-- enable focus component -->
+				<p:focus context="panel-signup" />
+				<h1
+					style="color: Blue; width: 450px; box-shadow: 10px 10px 5px darkgrey;">
+					User Login Using OTP</h1>
+				<br />
+
+	User Name : 
+	<p:inputText  size="20" value="#{login.username}" /> <br/><br/>
+	<p:commandButton value="Send Otp" action="#{lDao.otp(login )}"/>
+	<br /><br />
+	
+	
+	<p>
+		<p:outputLabel value="#{errorMessage}"/>
+	</p>
+	
+	</p:panel>
+</h:form>
+</div>
+</center>
+</h:body>
+</html>

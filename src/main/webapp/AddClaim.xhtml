@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+		crossorigin="anonymous" />
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+	<style>
+body {
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+outputTextColor {
+	color: red;
+}
+</style>
+
+</h:head>
+
+<body
+	style="background-image:url(#{request.contextPath}/Images/image12.jpg);">
+	<div>
+		<ui:include src="/Navbar.xhtml" />
+	</div>
+	<center>
+		<p:panel style="background-color:#D3D9DE;">
+			<b>
+				<h2>ADD CLAIM</h2>
+			</b>
+		</p:panel>
+	</center>
+
+	<h:form id="form">
+		<br />
+		<br />
+		<h:panelGroup id="details" class="row">
+			&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+			<br />
+			<br />
+
+			<h:panelGroup class="col-sm-3">
+				<br /> Procedure ID :
+			<h:selectOneMenu value="#{i.procedureId}">
+					<f:selectItem itemLabel="Select one item" />
+					<f:selectItems value="#{i.getPidFromView()}" />
+					<f:ajax listener="#{i.searchViewField()}"
+						render="details idrefresh" execute="@form"></f:ajax>
+
+				</h:selectOneMenu>
+				<br />
+				<br />
+				Health ID:
+				<h:outputText value="#{i.vObject.healthId}" />
+				<br />
+				<br />
+				Procedure ID:
+				<h:outputText value="#{i.vObject.procedureId}" />
+				<br />
+				<br />
+				Provider ID:
+				<h:outputText value="#{i.vObject.pId}" />
+				<br />
+				<br />
+				<br />
+				<br />
+				<h:commandButton class="btn btn-info" value="Back"
+					action="ShowClaim.xhtml" />
+			</h:panelGroup>
+			<br />
+			<br />
+
+			<h:panelGroup class="col-sm-4">
+
+				<br />
+				First Name:
+				<h:outputText value="#{i.vObject.firstName}" />
+				<br />
+				<br />
+				
+				Last Name:
+				<h:outputText value="#{i.vObject.lastName}" />
+				<br />
+				<br />
+				Insurance ID :
+				<h:selectOneMenu value="#{i.inId}">
+					<f:selectItems value="#{i.insuranceIdList}" />
+					<f:ajax render="details" execute="@form"></f:ajax>
+				</h:selectOneMenu>
+				<br />
+				<br />
+				Insurance ID :
+				<h:outputText id="idrefresh" value="#{i.inId}" />
+				<br />
+				<br />
+				Procedure Type:
+				<h:outputText value="#{i.vObject.procedureType}" />
+				<br />
+				<br />
+			</h:panelGroup>
+
+			<h:panelGroup class="col-sm-4">
+
+				<br />
+				Procedure Charge:
+				<h:outputLabel for="forNumber" />
+				<h:inputText id="forNumber" value="#{cDao.procedureCharge}"
+					maxlength="8" required="true" onchange="submit"
+					requiredMessage="Procedure Charge is mandatory"
+					converterMessage="Only  number allowed">
+
+				</h:inputText>
+				<br />
+				&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+			
+				<h:message for="forNumber" style="color:red;" />
+				<br />
+			
+				Medicine Charges:
+				<h:outputText value="#{i.vObject.medicineTotalCost}" />
+				<br />
+				<br />
+				Procedure BeginDate:
+				<h:outputText value="#{i.vObject.procedureBeginDate}">
+					<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+				</h:outputText>
+				<br />
+				<br />
+				
+				Procedure EndDate:
+				<h:outputText value="#{i.vObject.procedureEndDate}">
+					<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+				</h:outputText>
+				<br />
+				<br />
+				<br />
+				<br />
+				<center>
+					<h:commandButton value="Submit" class="btn btn-primary"
+						action="#{cDao.addClaimViewfield(claim,i.vObject)}" />
+				</center>
+
+				<center>
+					<h:message for="error" />
+				</center>
+
+			</h:panelGroup>
+
+		</h:panelGroup>
+
+	</h:form>
+</body>
+
+
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+	<style>
+body {
+	margin: 0px;
+	padding: 0px;
+	background-size: cover;
+	background-repeat:no-repeat;
+	background-image: url(#{request.contextPath}/images/02.png);
+}
+
+.navbar {
+	background-color: #3090C7;
+	color: #fff;
+	display: flex;
+	justify-content: space-between;
+	padding: 15px 20px;
+}
+.nav-brand {
+	font-size: 25px;
+	font-style: italic;
+	font-weight: bold;
+	text-decoration: none;
+	color: #fff;
+}
+
+input[type=text]:focus {
+	transition: width 0.4s ease-in-out;
+}
+
+.signupForm {
+	margin-left: 85px;
+	margin-top: 50px;
+	box-shadow: 10px 10px 5px darkgrey;
+	width: 500px;
+	border-radius: 20px;
+}
+</style>
+</h:head>
+<h:body>
+	<div>
+		<nav class="navbar"> 
+		<h:outputLink value="HomePage.xhtml" class="nav-brand">Health Care</h:outputLink> 
+			</nav>
+		<f:facet name="last">
+
+			<h:outputStylesheet library="webjars"
+				name="font-awesome/5.12.0/css/all.min-jsf.css" />
+			<h:outputStylesheet library="webjars"
+				name="font-awesome/5.12.0/css/v4-shims.min-jsf.css" />
+		</f:facet>
+	 
+			<div class="signupForm" align="center">
+				<h:form>
+
+					<p:panel id="panel-signup">
+
+						<!-- enable focus component -->
+		.		<p:focus context="panel-signup" />
+						<h1
+							style="color: Blue; width: 450px; box-shadow: 10px 10px 5px darkgrey;">
+							User Login Using OTP</h1>
+						<br />
+						<div class="col">
+							<p:outputLabel for="username" value="Username :"
+								styleClass="col-fixed" style="width:400px;" />
+							<p:spacer />
+							<p:spacer />
+							<p:inputText id="username" value="#{login.username}"
+								disabled="true" readonly="true" />
+							<br /> <br />
+						</div>
+						<div class="col">
+							<p:outputLabel for="otp" value="Enter OTP: "
+								styleClass="col-fixed" style="width:400px;" />
+							<p:spacer />
+							<p:spacer />
+							<p:inputText id="otp" value="#{login.otp}" />
+						</div>
+						<br />
+						<br />
+						<p:commandButton value="Submit"
+							action="#{lDao.validateOtp1(login)}" />
+
+						<p>
+							<h:outputLabel value="#{error}" />
+						</p>
+
+					</p:panel>
+				</h:form>
+			</div>
+		
+			<div>
+			<ui:include src="/Footer.xhtml" />
+		</div>
+		</div>
+</h:body>
+</html>

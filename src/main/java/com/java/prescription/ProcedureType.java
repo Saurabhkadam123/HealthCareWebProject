@@ -1,0 +1,5 @@
+package com.java.prescription;
+
+public enum ProcedureType {
+	SURGERY,BODYPAIN,EYEPAIN,ROOTCANAL,FEVER,HEADACHE,ASHTMA,STOMACHE,JOINTPAIN,ULCER,COUGH;
+}

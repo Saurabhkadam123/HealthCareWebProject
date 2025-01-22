@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.password">india@123</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/healthCare</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		
+		<!-- provider Avialability -->
+		<mapping class="com.java.healthcare.entity.ProviderAvailability" />
+
+		<!-- signup provider -->
+		<mapping class="com.java.project.Provider" />
+		<mapping class="com.java.project.License" />
+
+		<!-- login -->
+		<mapping class="com.java.admin.AdminEn" />
+		<mapping class="com.java.loginProvider.Login" />
+
+		<!-- View and Apprrove -->
+		<mapping class="com.java.viewapprove.Appointment" />
+
+		<!-- View Insurance -->
+		<mapping class="com.java.viewinsurance.Insurance" />
+		<mapping class="com.java.viewinsurance.RecInsurance" />
+		<mapping class="com.java.viewinsurance.ViewInsurance" />
+
+		<!-- Write Prescription -->
+		<mapping class="com.java.prescription.Procedure" />
+		<mapping class="com.java.prescription.Medicine" />
+		<mapping class="com.java.prescription.Recipient" />
+		<mapping class="com.java.prescription.Procedurecode" />
+
+
+		<!-- add and update claim -->
+		<mapping class="com.java.claim.Claim" />
+		<mapping class="com.java.claim.ClaimViewfield" />
+		
+		<!-- search and view PaymentDetails -->
+		<mapping class="com.java.searchpaydetails.Payments"/>
+	</session-factory>
+</hibernate-configuration>

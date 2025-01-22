@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet"
+		href="https://unpkg.com/primeflex@^3/primeflex.css" />
+	<title>Provider Details</title>
+	<style>
+body {
+	background-color: #ADD8E6;
+}
+
+.card {
+	background-color: #ffff;
+	margin-left: 120px;
+	margin-top: 50px 50px;
+	box-shadow: 10px 10px 5px darkgrey;
+	width: 650px;
+}
+</style>
+
+</h:head>
+<h:body
+	style="background-image:url(../image/doctor03.PNG);backdrop-filter:blur(4px);">
+	<center>
+		<div class="card">
+			<h:form>
+				<p:panel>
+					<h1
+						style="color: Blue; width: 450px; box-shadow: 10px 10px 5px darkgrey;">Provider
+						Details</h1>
+					<br />
+
+					<div class="col">
+						<p:outputLabel value="First name: " styleClass="col-fixed"></p:outputLabel>
+						<p:inputText id="FirstName" readonly="true" label="FirstName"
+							size="40" value="#{oneProvider.fristName}" disabled="true">
+							<p:tooltip for="FirstName" value="name cannot edit"
+								position="top" />  </p:inputText>
+					</div>
+					<br />
+					<div class="col">
+						<p:outputLabel value="Middle name: " styleClass="col-fixed"></p:outputLabel>
+						<p:inputText id="MiddleName" readonly="true" label="MiddleName"
+							size="40" value="#{oneProvider.middleName}" disabled="true">
+						</p:inputText>
+					</div>
+					<br />
+					<div class="col">
+						<p:outputLabel value="Last name: " styleClass="col-fixed"></p:outputLabel>
+						<p:inputText id="LastName" readonly="true" label="LastName"
+							size="40" value="#{oneProvider.lastName}" disabled="true"></p:inputText>
+					</div>
+					<br />
+					<div class="col">
+						<p:outputLabel value="Phne Number: " styleClass="col-fixed"></p:outputLabel>
+						<p:inputText id="Phonenumber" readonly="true" label="Phonenumber"
+							size="40" value="#{oneProvider.phoneNo}" disabled="true"></p:inputText>
+					</div>
+					<br />
+					<div class="col">
+						<p:outputLabel value="Email: " styleClass="col-fixed"
+							style="width:400px"></p:outputLabel>
+						<p:inputText id="Email" readonly="true" size="40" label="Email"
+							value="#{oneProvider.providerEmailId}" disabled="true"></p:inputText>
+					</div>
+					<br />
+					
+					<div class="col">
+						<p:outputLabel value="Hospital_name " styleClass="col-fixed"
+							style="width:400px"></p:outputLabel>
+						<p:inputText id="Hospital_name" readonly="true" size="40" label="Hospital_name"
+							value="#{oneProvider.hospital}" disabled="true"></p:inputText>
+					</div>
+					<br />
+
+					<div class="col">
+						<p:outputLabel value="Date of Brith:" styleClass="col-fixed"></p:outputLabel>
+						<p:datePicker readonly="true" id="DOB" required="true" label="DOB"
+							size="40" value="#{oneProvider.providerDob}" disabled="true"></p:datePicker>
+					</div>
+					<br />
+					<div class="col">
+						<p:outputLabel value="State:" styleClass="col-fixed"></p:outputLabel>
+						<p:inputText id="State" readonly="true" size="40" label="State"
+							value="#{oneProvider.state}" disabled="true"></p:inputText>
+					</div>
+					<br />
+					<div class="col">
+						<p:outputLabel value="City: " styleClass="col-fixed"></p:outputLabel>
+						<p:inputText id="City" readonly="true" size="40" label="City"
+							value="#{oneProvider.city}" disabled="true"></p:inputText>
+					</div>
+					<br />
+					<div class="col">
+						<p:outputLabel value="Address1: " styleClass="col-fixed"></p:outputLabel>
+						<p:inputText id="Address1" required="true" readonly="true"
+							label="Address1" size="40" value="#{oneProvider.address1}"
+							disabled="true"></p:inputText>
+					</div>
+					<br />
+					<div class="col">
+						<p:outputLabel value="Address2: " styleClass="col-fixed"
+							style="width:400px"></p:outputLabel>
+						<p:inputText id="Address2" readonly="true" size="40"
+							label="Address2" value="#{oneProvider.address2}" disabled="true"></p:inputText>
+					</div>
+					<br />
+					<div class="col">
+						<p:outputLabel value="Street name: " styleClass="col-fixed"></p:outputLabel>
+						<p:inputText id="StreetName" readonly="true" size="40"
+							label="Street name" value="#{oneProvider.streetName}"
+							disabled="true"></p:inputText>
+					</div>
+					<br />
+					<div class="col">
+						<p:outputLabel value="Land Mark: " styleClass="col-fixed"></p:outputLabel>
+						<p:inputText id="LandMark" readonly="true" size="40"
+							label="Land Mark" value="#{oneProvider.landMark}" disabled="true"></p:inputText>
+					</div>
+					<br />
+					<div class="col">
+						<p:outputLabel value="Gender: " styleClass="col-fixed"></p:outputLabel>
+						<p:inputText id="Gender" readonly="true" size="40" label="Gender"
+							value="#{oneProvider.providerGender}" disabled="true"></p:inputText>
+					</div>
+					<br />
+					<div class="col">
+						<p:outputLabel value="Specialization: " styleClass="col-fixed"></p:outputLabel>
+						<p:inputText id="Specialization" readonly="true" size="40"
+							label="Specialization" value="#{oneProvider.specialization}"
+							disabled="true"></p:inputText>
+					</div>
+					<br />
+
+					<div class="col">
+						<p:outputLabel value="Category " styleClass="col-fixed"></p:outputLabel>
+						<p:inputText id="Category" readonly="true" size="40"
+							label="Category" value="#{oneProvider.category}" disabled="true"></p:inputText>
+					</div>
+					<br />
+					<div class="col">
+						<p:outputLabel value="Council " styleClass="col-fixed"></p:outputLabel>
+						<p:inputText id="council" readonly="true" size="40"
+							label="council" value="#{oneProvider.council}" disabled="true"></p:inputText>
+					</div>
+					<br />
+
+					<div class="col">
+						<p:outputLabel value="Education " styleClass="col-fixed"></p:outputLabel>
+						<p:inputText id="education" readonly="true" size="40"
+							label="education" value="#{oneProvider.education}"
+							disabled="true"></p:inputText>
+					</div>
+					<br />
+					<div class="col">
+						<p:outputLabel value="Speciality " styleClass="col-fixed"></p:outputLabel>
+						<p:inputText id="speciality" readonly="true" size="40"
+							label="speciality" value="#{oneProvider.speciality}"
+							disabled="true"></p:inputText>
+					</div>
+					<br />
+					<div class="col">
+						<p:outputLabel value="License_ID " styleClass="col-fixed"></p:outputLabel>
+						<p:inputText id="licenseId" readonly="true" size="40"
+							label="licenseId" value="#{oneProvider.licenseId}"
+							disabled="true"></p:inputText>
+					</div>
+					<br />
+					<div class="col">
+						<p:outputLabel value="Aadhar_No " styleClass="col-fixed"></p:outputLabel>
+						<p:inputText id="aadharNo" readonly="true" size="40"
+							label="aadharNo" value="#{oneProvider.aadharNo}" disabled="true"></p:inputText>
+					</div>
+					<br />
+					<div class="col">
+						<p:outputLabel value="username " styleClass="col-fixed"></p:outputLabel>
+						<p:inputText id="username" readonly="true" size="40"
+							label="username" value="#{oneProvider.username}" disabled="true"></p:inputText>
+					</div>
+					<br />
+
+
+
+
+					<div class="col">
+						<p:outputLabel value="Experience: " styleClass="col-fixed"></p:outputLabel>
+						<p:inputText id="Experience" readonly="true" size="40"
+							label="Experience" value="#{oneProvider.experience}"
+							disabled="true"></p:inputText>
+					</div>
+					<br />
+					
+
+				</p:panel>
+				<p:commandButton value="Validate"
+					action="#{aDao.approveProvider(oneProvider,providerEn)}"
+					style="margin:20px" ajax="false" />
+
+				
+					<p:commandButton value="cancel"
+						action="AdminHomepage.xhtml"></p:commandButton>
+				
+
+
+			</h:form>
+
+		</div>
+	</center>
+</h:body>
+</html>

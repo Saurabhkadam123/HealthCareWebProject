@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<h:head>
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+		crossorigin="anonymous" />
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+	<style>
+body {
+	/* background-image:
+		url("https://st4.depositphotos.com/2903611/22564/i/450/depositphotos_225649476-stock-photo-claim-text-notepad-table.jpg");
+	 */
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+form {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.red {
+	color: #cc0000;
+}
+
+.blue {
+	color: #0000cc;
+}
+
+.green {
+	color: rgb(0, 255, 0);
+}
+</style>
+</h:head>
+
+<h:body
+	style="background-image:url(#{request.contextPath}/Images/image12.jpg);">
+	<div>
+		<ui:include src="/Navbar.xhtml" />
+	</div>
+	<center>
+		<br /> <br /> <br /> <b><h2
+				style="font-size: 40px; color: black;">Claim Record</h2></b>
+
+	</center>
+	<div style="overflow-x: auto;">
+		<h:form>
+			<p:dataTable var="e" value="#{cDao.showClaimDetailsDao()}"
+				paginator="true" rows="4" paginatorPosition="bottom"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}
+                     {RowsPerPageDropdown} "
+				rowsPerPageTemplate="4,10,15">
+
+				<p:column headerText="Claim Id">
+					<h:commandLink value="#{e.claimId}"
+						action="#{cDao.searchClaim(e.claimId)}" />
+				</p:column>
+				<p:column headerText="Procedure Id">
+					<h:outputText value="#{e.procedureId}" />
+				</p:column>
+				<p:column headerText="Health Id">
+					<h:outputText value="#{e.healthId}" />
+				</p:column>
+				<p:column headerText="Insurance Id">
+					<h:outputText value="#{e.insuranceId}" />
+				</p:column>
+				<p:column headerText="Claim Amount">
+					<h:outputText value="#{e.totalAmount}" />
+				</p:column>
+				<p:column headerText="Status">
+					<h:outputText
+						styleClass="#{e.status == 'DENY'? 'red': e.status == 'APPROVED'? 'green': 'black'}"
+						value="#{e.status}" />
+				</p:column>
+				<p:column headerText="Claim Date">
+					<h:outputText value="#{e.date}">
+						<f:convertDateTime type="date" pattern="dd-MM-yyyy"
+							timeZone="Asia/Kolkata" />
+					</h:outputText>
+				</p:column>
+				<!-- <p:column headerText="Delete">
+					<h:commandButton class="btn btn-danger" action="#{cDao.deleteClaim(e)}" value="Delete" />
+				</p:column> -->
+			</p:dataTable>
+			<center>
+				<br></br>
+				<h:commandButton class="btn btn-primary" action="AddClaim.xhtml"
+					value="Add Claim"></h:commandButton>
+			</center>
+		</h:form>
+	</div>
+</h:body>
+</html>

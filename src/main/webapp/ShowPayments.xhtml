@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>ShowPayments</title>
+	<style>
+body {
+	background-image: url('../Img/hero-bg.jpg');
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	font-family: sans-serif;
+}
+
+.green {
+	color: #008000;
+}
+
+.red {
+	color: red;
+}
+</style>
+</h:head>
+<h:body>
+	<div>
+		<ui:include src="/Navbar.xhtml" />
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<p:dataTable id="allData" widgetVar="ProviderTable" var="p"
+		value="#{DaoImpl.ShowPayments()}"
+		emptyMessage="No Payments found with given criteria" scrollable="true"
+		scrollHeight="300">
+
+		<f:facet name="header">
+			<span><b>All Transaction Details</b></span>
+		</f:facet>
+
+		<p:column headerText="PaymentID">
+			<h:outputText value="#{p.transactionId}" />
+		</p:column>
+
+		<p:column headerText="HealthID">
+			<h:outputText value="#{p.healthID}" />
+		</p:column>
+
+		<p:column headerText="ProcedureID">
+			<h:outputText value="#{p.procedureID}" />
+		</p:column>
+
+		<p:column headerText="Name">
+			<h:outputText value="#{p.firstName}" />
+		</p:column>
+
+		<p:column headerText="Amount">
+			<h:outputText value="#{p.paymentAmount}" />
+		</p:column>
+		<p:column headerText="PaidThrough">
+			<h:outputText value="#{p.paidThrough}" />
+		</p:column>
+
+
+		<p:column headerText="PaidDate">
+			<h:outputText value="#{p.paymentDate}" />
+		</p:column>
+
+		<p:column headerText="Status">
+			<h:outputText value="#{p.paymentsStatus}"
+				styleClass="#{p.paymentsStatus == 'PAID' ? 'green': p.paymentsStatus == 'REJECT'?'red': 'black'}" />
+		</p:column>
+
+
+
+	</p:dataTable>
+	<br />
+	<p:commandButton value="Print" type="button" icon="pi pi-print"
+		styleClass="shadow-1 mb-3 mr-2">
+
+		<p:printer target="allData" />
+	</p:commandButton>
+	<br />
+	<br />
+</h:body>
+</html>

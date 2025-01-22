@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Show Availabilities</title>
+
+	<style>
+#footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+}
+
+#headTitle {
+	/* position: relative;
+	padding: 0;
+	margin: 0;
+	font-family: "Raleway", sans-serif;
+	font-weight: 300;
+	font-size: 30px;
+	background-color: white;
+	background: window; */
+	font-size: 25px;
+	font-weight: 600;
+	color: blue;
+	background-image: linear-gradient(to right, #553c9a, #b393d3);
+	color: transparent;
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+}
+
+#cancelButt {
+	color: red;
+}
+</style>
+</h:head>
+<h:body
+	style="background-image: url('https://thumbs.dreamstime.com/b/blank-light-blue-gradient-background-product-display-white-backdrop-empty-studio-room-floor-abstract-texture-copy-space-195275134.jpg'); 
+  background-repeat: no-repeat;height: 450px;
+  background-size: cover;">
+	<div>
+		<ui:include src="/Navbar.xhtml" />
+	</div>
+
+
+	<div align="center" id="mainDiv">
+		<h:form id="showForm">
+			<br />
+
+			<p:growl id="infoMsg" showSummary="true" life="7000"
+				globalOnly="true">
+			</p:growl>
+			<div id="searchItems">
+				<p:selectOneMenu id="currentStatus" value="#{avlDao.currentStatus}"
+					valueChangeListener="#{avlDao.onCurrentStatusChange}"
+					onchange="submit()">
+					<f:selectItem itemLabel="Filter Records by Availability Status "
+						itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{avlDao.loadAvailabilityStatus()}" />
+				</p:selectOneMenu>
+			</div>
+			<h2>
+				<span id="headTitle"><h:outputLabel
+						value="#{avlDao.currentStatus}  AVAILABILITIES"
+						rendered="#{avlDao.isShowAvailabilityTableShowable()}" /></span>
+			</h2>
+			<!-- <p:messages id="messages" showIcon="true" showSummary="true" autoUpdate="true"
+				closable="true"> -->
+
+			<p:dataTable id="showDataTable" var="a"
+				value="#{avlDao.showAvailabilityDetails()}" paginator="true"
+				paginatorPosition="bottom" rows="5" widgetVar="availabilityTable"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink}
+                     {PreviousPageLink} {PageLinks} {NextPageLink}
+                     {LastPageLink} {RowsPerPageDropdown}"
+				currentPageReportTemplate="{currentPage} of {totalPages} ({totalRecords})"
+				rowsPerPageTemplate="5,10,15" sortBy="#{a.availabilityId}"
+				sortMode="multiple"
+				rendered="#{avlDao.isShowAvailabilityTableShowable()}">
+
+				<p:column headerText="availabilityId" sortBy="#{a.availabilityId}">
+					<f:facet name="header">AvailabilityID</f:facet>
+					<h:outputText value="#{a.availabilityId}" />
+				</p:column>
+				<p:column headerText="availableDate">
+					<f:facet name="header">Available on</f:facet>
+					<h:outputText value="#{a.availableDate}">
+						<f:convertDateTime pattern="yyyy-MM-dd"
+							timeZone="#{avlDao.getTimeZone()}" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="startTime">
+					<f:facet name="header">Start Time</f:facet>
+					<h:outputText value="#{a.startTime}" />
+				</p:column>
+				<p:column headerText="endTime">
+					<f:facet name="header">End Time</f:facet>
+					<h:outputText value="#{a.endTime}" />
+				</p:column>
+				<p:column headerText="currentStatus">
+					<f:facet name="header">Current Status</f:facet>
+					<h:outputText value="#{a.currentStatus}" />
+				</p:column>
+				<p:column rendered="#{avlDao.buttonColumnShowable}">
+					<f:facet name="header">RESCHEDULE</f:facet>
+					<p:commandButton style=" border-radius:10px; "
+						action="#{avlDao.searchProviderAvailabilityById(a.availabilityId)}"
+						value="RESCHEDULE" />
+				</p:column>
+				<p:column rendered="#{avlDao.buttonColumnShowable}">
+					<f:facet name="header">Cancel</f:facet>
+					<p:commandButton id="cancelButt"
+						style="background-color:rgb(204,0,0); border-radius:10px; "
+						action="#{avlDao.cancelProviderAvailability(a.availabilityId)}"
+						value="CANCEL">
+						<p:confirm header="Confirmation"
+							message="Are you sure you want Cancel this availability ?"
+							icon="pi pi-exclamation-triangle" />
+					</p:commandButton>
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+						responsive="true" width="350">
+						<p:commandButton value="No" type="button"
+							styleClass="ui-confirmdialog-no ui-button-flat" />
+						<p:commandButton value="Yes" type="button"
+							styleClass="ui-confirmdialog-yes" />
+					</p:confirmDialog>
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+
+	<div id="footer">
+		<ui:include src="/Footer.xhtml" />
+	</div>
+</h:body>
+</html>

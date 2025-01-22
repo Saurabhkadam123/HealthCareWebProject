@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<style>
+body {
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+.tab {
+	tab-size: 5;
+}
+</style>
+	<title>History Insurance</title>
+</h:head>
+
+<h:body
+	style="background-image:url(#{request.contextPath}/images/MicrosoftTeams-image.png);">
+	<div>
+		<ui:include src="/Navbar.xhtml" />
+	</div>
+	<h:form id="form">
+		<center>
+			<h2>
+				<h:outputText value="Insurance details" />
+			</h2>
+			<h:panelGrid columns="2" cellpadding="3">
+				<p:outputLabel for="textBox" value="Enter ID" />
+				<h:selectOneMenu id="textBox" value="#{appointment.healthId}">
+					<f:selectItems var="h" value="#{iDao.searchCompleteHealthId()}"
+						itemValue="#{h.healthId}" itemLabel="#{h.healthId}" />
+				</h:selectOneMenu>
+				<h:message for="textBox" style="color:red;" />
+			</h:panelGrid>
+			<h:commandButton class="buttons" value="Search" />
+		</center>
+		<br />
+		<br />
+	</h:form>
+	<center>
+		<c:if test="${param['form:textBox'] != null}">
+			<p:dataTable id="table"
+				value="#{iDao.showInsurance(appointment.healthId)}" var="e"
+				emptyMessage="No results found" border="3"
+				paginatorPosition="bottom" table="" paginator="true" rows="4"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink}
+               {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}  
+               {RowsPerPageDropdown}"
+				rowsPerPageTemplate="4,8,12" update="table textBox">
+
+				<p:column headerText="PlanId">
+					<h:outputText value="#{e[0].planId}" />
+				</p:column>
+				<p:column headerText="Plan Name">
+					<h:outputText value="#{e[0].planName}" />
+				</p:column>
+				<p:column headerText="PlanType">
+					<h:outputText value="#{e[0].planType}" />
+				</p:column>
+				<p:column headerText="PolicyBuyDate">
+					<h:outputText value="#{e[0].policyBuyDate}">
+						<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="ExpiryDate">
+					<h:outputText value="#{e[0].expiryDate}">
+						<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+					</h:outputText>
+
+				</p:column>
+				<p:column headerText="Premium">
+					<h:outputText value="#{e[0].premiumapplicable}" />
+				</p:column>
+				<p:column headerText="Coverage">
+					<h:outputText value="#{e[0].coverageapplicable}" />
+				</p:column>
+
+				<p:column headerText="Status">
+					<h:outputText value="#{e[0].status}" />
+				</p:column>
+
+			</p:dataTable>
+		</c:if>
+	</center>
+</h:body>
+</html>

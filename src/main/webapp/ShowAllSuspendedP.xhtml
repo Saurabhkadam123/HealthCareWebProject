@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>All Provider</title>
+
+	<style>
+body {
+	width: 100%;
+	background-color: #ADD8E6;
+	background-image:
+		url(https://www.dreamstime.com/doctor-using-laptop-computer-analysis-coronavirus-covid-data-laboratory-background-image177309654)
+}
+</style>
+</h:head>
+
+<h:body>
+	<Center>
+		<h1 style="color: red">Provider Details</h1>
+	</Center>
+	<h:form>
+		<p:dataTable var="e" value="#{aDao.showAllSuspendedProvider()}"
+			paginator="true" rows="10"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink}
+                     {PreviousPageLink} {PageLinks} {NextPageLink}
+                     {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15" scrollable="true" scrollWidth="3500"
+			scrollHeight="1220" allowUnsorting="true" sortMode="single">
+
+			<p:column sortBy="#{e.fristName}" headerText="First Name">
+				<h:outputText value="#{e.fristName}" />
+			</p:column>
+
+			<!-- <p:column headerText="Middle Name">
+					<h:outputText value="#{e.middleName}" />
+				</p:column>
+
+				<p:column headerText="Last Name">
+					<h:outputText value="#{e.lastName}" />
+				</p:column> -->
+
+			<p:column sortBy="#{e.phoneNo}" headerText="Phone number">
+				<h:outputText value="#{e.phoneNo}" />
+			</p:column>
+
+			<p:column headerText="DOB">
+				<p:datePicker value="#{e.providerDob}" disabled="true" />
+			</p:column>
+			<p:column headerText="State">
+				<h:outputText value="#{e.state}" />
+			</p:column>
+			<p:column headerText="City">
+				<h:outputText value="#{e.city}" />
+			</p:column>
+
+			<p:column headerText="Gender">
+				<h:outputText value="#{e.providerGender}" />
+			</p:column>
+
+
+			<p:column headerText="Specialization">
+				<h:outputText value="#{e.specialization}" />
+			</p:column>
+			<p:column headerText="Experience" styleClass="text-center">
+				<h:outputText value="#{e.experience}" />
+			</p:column>
+
+			<p:column headerText="Email">
+				<h:outputText value="#{e.providerEmailId}" />
+			</p:column>
+
+			<p:column headerText="education">
+				<h:outputText value="#{e.education}" />
+			</p:column>
+			<p:column headerText="category">
+				<h:outputText value="#{e.category}" />
+			</p:column>
+
+			<p:column styleClass="text-center">
+				<f:facet name="header">
+					<h:outputText value="council" />
+				</f:facet>
+				<h:outputText value="#{e.council}" />
+			</p:column>
+			<p:column headerText="speciality">
+				<h:outputText value="#{e.speciality}" />
+			</p:column>
+			<p:column>
+				<p:commandButton value="Review"
+					action="#{aDao.searchProvider(e.providerId)}" ajax="true"></p:commandButton>
+			</p:column>
+			<p:column>
+				<p:commandButton value="back" action="AdminHomepage.xhtml"></p:commandButton>
+			</p:column>
+		</p:dataTable>
+		<br />
+
+	</h:form>
+</h:body>
+
+</html>

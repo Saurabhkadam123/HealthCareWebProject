@@ -1,0 +1,198 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:my="http://java.sun.com/jsf/composite/my"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+
+<h:body
+	style="background-image: url('https://mgmhealthcare.in/wp-content/uploads/2022/06/our-specialities.jpg'); background-repeat: no-repeat;height: 50px; background-size: cover;">
+	<div>
+		<ui:include src="/Navbar.xhtml" />
+	</div>
+	<h:form>
+
+		<center>
+
+			<h1>Patient Medical History</h1>
+			<hr />
+			   
+		</center>
+
+		<h2 style="margin-left: 10px">Search History :</h2>
+
+		<h2>
+			<p:selectOneRadio value="#{patHisListener.valueType}"
+				onchange="submit()"
+				valueChangeListener="#{patHisListener.valueSearch}">
+				<f:selectItem itemValue="healthId" itemLabel="Health Id" />
+				<f:selectItem itemValue="Name" itemLabel="Name" />
+				<f:selectItem itemValue="recipientmobileNo" itemLabel="MobileNo" />
+				<p:ajax listener="#{patHisListener.handelChange}"
+					render="inputBox resetButton searchButton" execute="@form" />
+			</p:selectOneRadio>
+		</h2>
+
+
+		<h:panelGroup id="inputBox">
+
+
+			<h:panelGroup
+				rendered="#{patHisListener.valueType eq 'Name'}">
+				<p:inputText value="#{patHisListener.valueSearch}"
+					valueChangeListener="#{patHisListener.valueChange}" id="name"
+					label="Keyword" placeholder="Enter Name...">
+				</p:inputText>
+			</h:panelGroup>
+
+
+
+			<h:panelGroup
+				rendered="#{patHisListener.valueType eq 'recipientmobileNo'}">
+				<p:inputText value="#{patHisListener.valueSearch}"
+					valueChangeListener="#{patHisListener.valueChange}" id="mobileNo"
+					label="Keyword1" placeholder="Enter MobileNo...">
+				</p:inputText>
+			</h:panelGroup>
+
+
+
+			<h:panelGroup rendered="#{patHisListener.valueType eq 'healthId'}">
+				<p:inputText value="#{patHisListener.valueSearch}"
+					valueChangeListener="#{patHisListener.valueChange}" id="hId"
+					label="Keyword2" placeholder="Enter Health Id..">
+				</p:inputText>
+			</h:panelGroup>
+
+
+
+			<h:panelGroup id="searchButton" rendered="#{patHisListener.search}">
+				<p:commandButton value="Search"
+					action="#{searchHisDao.searchHistory(patHisListener.valueSearch,patHisListener.valueType)}"
+					styleClass="mr-2" style="width: 8rem; margin-left:20px"
+					onclick="PrimeFaces.cleanWatermarks();"
+					oncomplete="PrimeFaces.showWatermarks();"
+					actionListener="#{patHisListener.handleSearch}">
+				</p:commandButton>
+			</h:panelGroup>
+
+
+
+			<h:panelGroup id="resetButton" rendered="#{patHisListener.reset}">
+				<p:commandButton value="Reset" update="inputBox errorBox"
+					process="@this" actionListener="#{patHisListener.clearInputFunc}"
+					styleClass="mr-2" style="width: 8rem; margin-left:20px;">
+					<f:ajax render="table"></f:ajax>
+				</p:commandButton>
+			</h:panelGroup>
+
+
+		</h:panelGroup>
+
+
+		<h:panelGroup id="errorBox">
+			<h:panelGroup rendered="#{patHisListener.showErrorBox}">
+				<h3>
+					<h:outputText value="#{searchHisDao.errorMessage}"
+						style="color: red" />
+				</h3>
+			</h:panelGroup>
+		</h:panelGroup>
+
+		<div></div>
+
+		<br />
+
+		<h:panelGroup id="table">
+
+			<h:panelGroup rendered="#{patHisListener.showTable}">
+				<p:dataTable var="e" value="#{searchHisDao.filteredList}"
+					widgetVar="customersTable"
+					emptyMessage="No Patient found with given criteria"
+					paginator="true" rows="5" paginatorPosition="bottom"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink}
+                {PreviousPageLink} {PageLinks} {NextPageLink}
+                {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15" showGridlines="true">    
+
+   
+           <p:column headerText="Procedure Id" sortBy="#{e.procedureID}">
+						<h:outputText value="#{e.procedureID}" />
+					</p:column>  
+
+
+           <p:column headerText="Health Id" sortBy="#{e.healthId}"
+						filterMatchMode="contains">
+						<h:outputText value="#{e.healthId}" />
+					</p:column>
+
+
+					<p:column headerText="Provider Id" sortable="true"
+						sortBy="#{e.providerId}">
+						<h:outputText value="#{e.providerId}" />
+					</p:column>               
+
+
+            <p:column headerText="Medicine Id" sortBy="#{e.itemId}">
+						<h:outputText value="#{e.itemId}" />
+					</p:column>
+
+
+					<p:column headerText="First Name" sortBy="#{e.recipientfirstName}">
+						<h:outputText value="#{e.recipientfirstName}" />
+					</p:column>
+
+
+					<p:column headerText="Last Name" sortBy="#{e.recipientlastName}">
+						<h:outputText value="#{e.recipientlastName}" />
+					</p:column>
+
+
+					<p:column headerText="Mobile Number"
+						sortBy="#{e.recipientlastName}">
+						<h:outputText value="#{e.recipientmobileNo}" />
+					</p:column>
+
+
+					<p:column headerText="Medicine Name" sortBy="#{e.medicineName}">
+						<h:outputLabel value="#{e.medicineName}">
+						</h:outputLabel>
+					</p:column>
+
+
+					<p:column headerText="Procedure Begin Date"
+						sortBy="#{e.procedureBeginDate}">
+						<h:outputText value="#{e.procedureBeginDate}">
+							<f:convertDateTime pattern="dd-MM-yyyy" />
+						</h:outputText>
+					</p:column> 
+
+
+            <p:column headerText="Procedure End date"
+						sortBy="#{e.procedureEndDate}">
+						<h:outputText value="#{e.procedureEndDate}">
+							<f:convertDateTime pattern="dd-MM-yyyy" />
+						</h:outputText>
+					</p:column>           
+
+
+            <p:column headerText="Procedure Type"
+						sortBy="#{e.procedureType}">
+						<h:outputLabel value="#{e.procedureType}">
+						</h:outputLabel>
+					</p:column>
+
+
+				</p:dataTable>    
+
+</h:panelGroup>
+
+		</h:panelGroup>
+
+	</h:form>
+
+</h:body>
+
+</html>

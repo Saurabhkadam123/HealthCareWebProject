@@ -1,0 +1,178 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+<title>Provider Main Page</title>
+<style>
+body{
+    background-image: url("Images/02.jpg");
+}
+
+.navbar {
+	background-color: #3090C7;
+	color: #fff;
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 20px;
+}
+
+.navbar ul {
+	list-style-type: none;
+	display: flex;
+	margin: 0;
+	padding: 10px 20px;
+}
+
+.navbar li {
+	margin-right: 20px;
+}
+
+.navbar li:last-child {
+	margin-right: 0;
+}
+
+.nav-brand {
+	font-size: 25px;
+	font-style: italic;
+	font-weight: bold;
+	text-decoration: none;
+	color: #fff;
+}
+
+.navbar a {
+	color: black;
+	text-decoration: none;
+	font-weight: lighter;
+	/*text-transform: uppercase;*/
+	padding: 10px;
+	transition: all 0.2s ease-in-out;
+}
+
+.nav-link {
+	color: #fff;
+	text-decoration: none;
+	padding: 5px 10px;
+	border-radius: 5px;
+}
+
+.navbar a:hover {
+	background-color: #fff;
+	color: #333;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+	background-color: white;
+}
+
+.nav-link{
+  color: black;
+  cursor: pointer;
+}
+</style>
+
+	
+</h:head>
+
+<h:body>
+<div>
+<nav class="navbar">
+    <h:outputLink value="HomePageNew.xhtml" class="nav-brand">Health Care</h:outputLink>
+  
+    <ul>
+		
+		 <li class="dropdown">
+			<h:outputLink value="#" class="nav-link">
+			<p:chip style="background-color: #3090C7" icon="pi pi-align-center" styleClass="mr-1"/>
+			Availability</h:outputLink>
+			<div class="dropdown-content">
+			<h:outputLink value="CreateAvailability.xhtml">Create Availability</h:outputLink>
+			
+			<h:outputLink value="ShowAvailabilities.xhtml">View And Update Availability</h:outputLink> 
+			</div>
+		</li>
+		
+		<li class="dropdown">
+			<h:outputLink value="#" class="nav-link">
+			<p:chip style="background-color: #3090C7" icon="pi pi-book" styleClass="mr-2"/>Appointment</h:outputLink>
+			
+			<div class="dropdown-content">
+			<h:outputLink value="ViewAppointment.xhtml">View Appointment</h:outputLink>
+			
+			 
+			</div>
+		</li>
+				
+		<li class="dropdown">
+			<h:outputLink value="#" class="nav-link">
+			<p:chip style="background-color: #3090C7" icon="pi pi-paypal" styleClass="mr-1"/>Payment Details</h:outputLink>
+			<div class="dropdown-content">
+			<h:outputLink value="SearchPaymentDetails.xhtml">Search Payment Details</h:outputLink>
+			<h:outputLink value="ShowPayments.xhtml">View Payment Details</h:outputLink>
+			</div>
+		</li>
+		
+		 <li class="dropdown">
+			<h:outputLink value="#" class="nav-link" >
+			<p:chip style="background-color: #3090C7" icon="pi pi-link" styleClass="mr-1"/>
+			Quick Links</h:outputLink><!-- Our services -->
+			<div class="dropdown-content">
+			<h:outputLink value="PatientHistory.xhtml">Patient Medical History</h:outputLink>
+			<h:outputLink value="AddPrescription.xhtml">Write Procedure</h:outputLink>
+			<h:outputLink value="ViewInsurance.xhtml">View Insurance</h:outputLink> 
+			<h:outputLink value="ShowClaim.xhtml">Add/Update Claims</h:outputLink> 
+			<h:outputLink value="SearchClaimHistory.xhtml">Search Claim History</h:outputLink> 
+			</div>
+		</li> 
+    
+      <li><h:outputLink value="ProviderContactUs.xhtml">
+      <p:chip style="background-color: #3090C7" icon="pi pi-phone" styleClass="mr-2"/>Contact Us</h:outputLink></li>
+      <li><h:outputLink value="ProviderProfileNew.xhtml">
+      <p:chip style="background-color: #3090C7" icon="pi pi-user" styleClass="mr-2"/>#{login.username}</h:outputLink></li>
+      
+       <!-- <h:form>
+    <div id="hamburger">
+        <input type="checkbox" id="hamburger-checkbox" />
+        <label for="hamburger-checkbox">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <ul id="menu">
+            <li><h:outputLink value="#">Patient Medical History</h:outputLink></li>
+            <li><h:outputLink value="#">Prescription And Recommendations</h:outputLink></li>
+            <li><h:outputLink value="#">View Insurance</h:outputLink> </li>
+        </ul>
+    </div>
+</h:form> -->
+    </ul> 
+    
+  </nav>
+  
+</div>
+
+</h:body>
+	 
+</html>

@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Search Page</title>
+	<script>
+
+
+function onBodyLoad() {
+	
+						/*Dynamic info*/
+	var selectedRadio = PF('mySelectName').getJQ().find(':checked').val();
+	
+	
+	var idSearchBoxDiv = document.getElementById('text1');
+
+	var textlabel = document.getElementById('myForm:text');
+
+	var paid = document.getElementById('myForm:paid');
+	var dropdown_paid = document.getElementById('myForm:dropdown_paid');
+
+	var status = document.getElementById('myForm:status');
+	var dropdown_status = document.getElementById('myForm:dropdown_status');
+
+	var searchButton = document.getElementById('myForm:searchButton');
+
+	var table = document.getElementById('myForm:allData');
+	
+	
+					/*Error Msg*/
+	var text_Msg = document.getElementById('myForm:textMsg');
+	var paid_Msg = document.getElementById('myForm:paidMsg');
+	var status_Msg = document.getElementById('myForm:statusMsg');
+	
+	
+	
+
+	if (selectedRadio == "PaymentID" || selectedRadio == "ProcedureID"
+			|| selectedRadio == "HealthID") {
+
+		textlabel.innerHTML = selectedRadio + " : "
+		idSearchBoxDiv.style.display = 'block';
+
+		paid.style.display = 'none';
+		dropdown_paid.style.display = 'none';
+
+		status.style.display = 'none';
+		dropdown_status.style.display = 'none';
+
+		searchButton.style.display = 'block';
+		table.style.display = 'none';
+		
+		text_Msg.style.display = 'none';
+		paid_Msg.style.display = 'none';
+		status_Msg.style.display = 'none';
+		
+		
+
+	} else if (selectedRadio == "paidThrough") {
+
+		textlabel.style.display = 'none';
+		idSearchBoxDiv.style.display = 'none';
+
+		paid.style.display = 'block';
+		dropdown_paid.style.display = 'block';
+
+		status.style.display = 'none';
+		dropdown_status.style.display = 'none';
+
+		searchButton.style.display = 'block';
+		table.style.display = 'none';
+		
+		text_Msg.style.display = 'none';
+		paid_Msg.style.display = 'none';
+		status_Msg.style.display = 'none';
+		
+
+	} else if (selectedRadio == "paymentsStatus") {
+
+		textlabel.style.display = 'none';
+		idSearchBoxDiv.style.display = 'none';
+		paid.style.display = 'none';
+		dropdown_paid.style.display = 'none';
+
+		status.style.display = 'block';
+		dropdown_status.style.display = 'block';
+
+		searchButton.style.display = 'block';
+		table.style.display = 'none';
+		
+		text_Msg.style.display = 'none';
+		paid_Msg.style.display = 'none';
+		status_Msg.style.display = 'none';
+
+	} else {
+		idSearchBoxDiv.style.display = 'none';
+		paid.style.display = 'none';
+		dropdown_paid.style.display = 'none';
+
+		status.style.display = 'none';
+		dropdown_status.style.display = 'none';
+
+		searchButton.style.display = 'none';
+		table.style.display = 'none';
+		
+		text_Msg.style.display = 'none';
+		paid_Msg.style.display = 'none';
+		status_Msg.style.display = 'none';
+		
+
+	}
+}
+
+
+
+function showTable() {
+	var tableStruct = document.getElementById('myForm:allData');
+	tableStruct.style.display = 'block';
+}
+
+function empty() {
+	var textfield = document.getElementById('myForm:textfield');
+	var dropdown_paid = document.getElementById('myForm:dropdown_paid');
+	var dropdown_status = document.getElementById('myForm:dropdown_status');
+	var radios = document.getElementById('myForm:radios');
+	textfield.value = "";
+	
+	
+}
+
+function showDetails() {
+	var myval = PF('mySelectName').getJQ().find(':checked').val();
+	myval = "";
+}
+
+function msg(){
+	var text_Msg = document.getElementById('myForm:textMsg');
+	var paid_Msg = document.getElementById('myForm:paidMsg');
+	var status_Msg = document.getElementById('myForm:statusMsg');
+	
+	text_Msg.style.display = 'block';
+	
+	var selectedRadio = PF('mySelectName').getJQ().find(':checked').val();
+	
+	if (selectedRadio == "paidThrough") {
+		
+		paid_Msg.style.display = 'block';
+		status_Msg.style.display = 'none';
+		
+	}else if (selectedRadio == "paymentsStatus"){
+		
+		paid_Msg.style.display = 'none';
+		status_Msg.style.display = 'block';
+		
+	}
+	
+}
+</script>
+	<style type="text/css">
+.ui-datatable-data-empty .ui-dt-c {
+	color: red !important;
+}
+
+body {
+	background-image: url('../Img/hero-bg.jpg');
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	font-family: sans-serif;
+}
+
+.ui-datatable-empty-message {
+	color: red !important;
+	font-size: 18px;
+	font-family: "Times New Roman", Times, serif;
+	font-weight: bold;
+}
+
+.ui-datatable {
+	background-color: navy;
+}
+
+.green {
+	color: #008000;
+}
+
+.red {
+	color: red;
+}
+
+.ui-datatable-empty-message {
+	color: red;
+	font-size: 18px;
+	font-family: "Times New Roman", Times, serif;
+	font-weight: bold;
+}
+
+.ui-datatable {
+	background-color: navy;
+}
+
+.ui-datatable-data {
+	font-family: sans-serif;
+	color: blue;
+}
+</style>
+
+
+</h:head>
+
+<h:body id="saturn" onload="onBodyLoad()">
+	<div>
+		<ui:include src="/Navbar.xhtml" />
+	</div>
+	<f:facet name="last">
+		<h:outputStylesheet library="default" name="css/style.css" />
+	</f:facet>
+
+	<h:form id="myForm">
+		<div>
+			<center>
+				<br /> <br /> <br /> <br /> <br />
+
+				<p:selectOneRadio widgetVar="mySelectName" id="radiox"
+					required="true" valueChangeListener="#{DaoImpl.onSearchTypeChange}"
+					onchange="submit()" value="#{DaoImpl.searchType}" onclick="empty()">
+
+					<f:selectItem itemValue="ProcedureID" itemLabel="ProcedureID" />&nbsp;
+					<f:selectItem itemValue="HealthID" itemLabel="HealthID" />&nbsp;
+					<f:selectItem itemValue="paidThrough" itemLabel="Online" />&nbsp;
+					<f:selectItem itemValue="paymentsStatus" itemLabel="Status" />
+				</p:selectOneRadio>
+				<br />
+
+				<div id="text1">
+					<h:outputText id="text" value="Search Here :" />
+					<p:inputText id="textfield" value="#{DaoImpl.searchValue}"
+						onchange="submit()" required="true"
+						requiredMessage="Please Enter Id"
+						valueChangeListener="#{DaoImpl.onChangeSearchValue}" maxlength="6">
+						<f:validator validatorId="payment.details.Validate" />
+
+					</p:inputText>
+					<br /> <br />
+					<h:message id="textMsg" for="textfield" style="color:red" />
+
+				</div>
+
+				<div id="div_paid">
+					<h:outputText id="paid" value="Select PaidBy : " />
+					<p:selectOneMenu id="dropdown_paid"
+						value="#{DaoImpl.selectedPayMode}" required="true"
+						requiredMessage="Please Select PaidBy"
+						valueChangeListener="#{DaoImpl.onPaidChange}" onchange="submit()"
+						style="width:12rem">
+						<f:selectItem itemValue="" itemLabel="Select One  "
+							noSelectionOption="true" />
+						<f:selectItems value="#{DaoImpl.loadPaidValues()}" />
+					</p:selectOneMenu>
+					<h:message id="paidMsg" for="dropdown_paid" style="color:red" />
+				</div>
+
+				<div id="div_status">
+					<p:outputLabel id="status" value="Select Status : " />
+					<p:selectOneMenu id="dropdown_status"
+						value="#{DaoImpl.selectedStatus}" required="true"
+						requiredMessage="Please Select Status"
+						valueChangeListener="#{DaoImpl.onStatusChange}"
+						onchange="submit()" style="width:12rem">
+						<f:selectItem itemValue="" itemLabel="Select One  "
+							noSelectionOption="true" />
+						<f:selectItems value="#{DaoImpl.loadStatusValues()}" />
+					</p:selectOneMenu>
+					<h:message id="statusMsg" for="dropdown_status" style="color:red" />
+				</div>
+
+				<p:commandButton id="searchButton" value="Search" process="@this"
+					action="#{DaoImpl.showClaimDetails()}" onfocus="msg()"
+					style="background-color:#007aa5 ; padding:2px; width:100px ; color:black;
+           			text-align: center; border-radius:5px; "
+					update="@form:allData" onclick="showTable()" />
+
+				<br /> <br />
+
+
+
+
+
+				<p:dataTable id="allData" widgetVar="ProviderTable" var="p"
+					value="#{mappedClaimList}"
+					emptyMessage="No Payments found with given criteria"
+					paginator="true" rows="5" paginatorPosition="bottom"
+					rowsPerPageTemplate="5,10,15">
+
+
+					<f:facet name="header">
+						<span><b>All Transaction Details</b></span>
+					</f:facet>
+
+					<p:column headerText="PaymentID" sortBy="#{p.transactionId}">
+						<h:outputText value="#{p.transactionId}" />
+					</p:column>
+
+					<p:column headerText="HealthID" sortBy="#{p.healthID}">
+						<h:outputText value="#{p.healthID}" />
+					</p:column>
+
+					<p:column headerText="ProcedureID" sortBy="#{p.procedureID}">
+						<h:outputText value="#{p.procedureID}" />
+					</p:column>
+
+					<p:column headerText="Name" sortBy="#{p.firstName}">
+						<h:outputText value="#{p.firstName}" />
+					</p:column>
+
+					<p:column headerText="Amount" sortBy="#{p.paymentAmount}">
+						<h:outputText value="#{p.paymentAmount}" />
+					</p:column>
+					<p:column headerText="PaidThrough" sortBy="#{p.paidThrough}">
+						<h:outputText value="#{p.paidThrough}" />
+					</p:column>
+
+
+					<p:column headerText="PaidDate" sortBy="#{p.paymentDate}">
+						<h:outputText value="#{p.paymentDate}" />
+					</p:column>
+
+					<p:column headerText="Status" sortBy="#{p.paymentsStatus}">
+						<h:outputText value="#{p.paymentsStatus}"
+							styleClass="#{p.paymentsStatus == 'PAID' ? 'green': p.paymentsStatus == 'REJECT'?'red': 'black'}" />
+					</p:column>
+
+
+				</p:dataTable>
+
+				<br />
+
+			</center>
+		</div>
+	</h:form>
+</h:body>
+</html>

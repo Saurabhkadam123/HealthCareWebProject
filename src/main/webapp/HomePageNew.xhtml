@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style>
+/* this is for Container on front page*/
+.container {
+	padding-left: 150px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	background-color: #fff;
+	border-radius: 10px;
+	margin-top: 100px;
+	margin-left: 100px;
+	margin-right: 450px;
+}
+
+/* this is for h1*/
+.container h1 {
+	color: #2c4964;
+	text-shadow: 2px 2px 5px #2F4F4F;
+}
+
+.container h4 {
+	color: black;
+}
+</style>
+	<script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+</script>
+</h:head>
+
+
+<h:body
+	style="background-image: url('https://thumbs.dreamstime.com/z/healthcare-medicine-covid-doctor-holding-diagnose-virtual-human-lungs-coronavirus-spread-inside-modern-interface-179931168.jpg'); 
+  background-repeat: no-repeat;height: 450px;
+  background-size: cover;">
+  
+	<div id="header">
+		<ui:include src="Navbar.xhtml"></ui:include>
+	</div>
+
+	<div class="container">
+		<h1>
+			Welcome to Health Care
+			<p:chip style="background-color : #fff;" icon="pi pi-heart-fill"
+				styleClass="mr-2" />
+		</h1>
+		<h4>
+			Our team of experienced medical professionals is dedicated to<br />
+			providing you with the best possible care.
+		</h4>
+	</div>
+	
+	<div id="footer">
+		<ui:include src="/Footer.xhtml" />
+	</div>
+	
+</h:body>
+</html>

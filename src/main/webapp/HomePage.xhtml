@@ -1,0 +1,422 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>Provider Main Page</title>
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+		crossorigin="anonymous"></link>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+		crossorigin="anonymous"></script>
+	<style>
+body {
+	/* background-image: url(images/bgtop.png), url(images/bg.png);
+background-repeat: repeat-x, repeat; */
+	margin: 0px;
+	padding: 0px;
+	background-color: #EBF4FA;
+	  background-image: url(#{request.contextPath}/image/02.jpg)
+	 ;  
+	background-repeat: repeat-x, repeat;
+}
+
+.navbar {
+
+	background-color: #3090C7;
+	color: #fff;
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 20px;
+}
+
+.navbar ul {
+	list-style-type: none;
+	display: flex;
+	margin: 0;
+	padding: 10px 20px;
+}
+
+.navbar li {
+	margin-right: 20px;
+}
+
+.navbar li:last-child {
+	margin-right: 0;
+}
+
+.nav-brand {
+	font-size: 25px;
+	color: white;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px black;
+	text-decoration: none;
+	color: white;
+}
+
+.navbar a {
+	color: black;
+	text-decoration: none;
+	font-weight: lighter;
+	/*text-transform: uppercase;*/
+	padding: 10px;
+	transition: all 0.2s ease-in-out;
+}
+
+.nav-link {
+	color: #fff;
+	text-decoration: none;
+	padding: 5px 10px;
+	border-radius: 5px;
+}
+
+.navbar a:hover {
+	background-color: #fff;
+	color: #333;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+	background-color: white;
+}
+
+.nav-link {
+     
+	color: black;
+	cursor: pointer;
+}
+
+.container {
+	width: 350;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 50px;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	background-color: #fff;
+	border-radius: 10px;
+	margin-top: 20px;
+	margin-left: 50px;
+	margin-right: 450px;
+}
+
+/* this is for h1*/
+.container h1 {
+	color: #2c4964;
+	text-shadow: 2px 2px 5px #2F4F4F;
+}
+
+.container h4 {
+	color: black;
+}
+
+.title {
+	background-color: white;
+	border-radius: 30px 0px 30px 0px;
+	box-shadow: 4px 3px 8px 1px #969696;
+	-webkit-box-shadow: 4px 3px 8px 1px #969696;
+	margin-top: 15px;
+	width: 600px;
+	text-shadow: 1px 1px 1px black;
+	margin-left: 50px;
+	padding: 10px 15px;
+	/* border: 1px solid black; */
+	-webkit-box-shadow: 4px 3px 8px 1px #969696;
+	position: relative;
+  animation-name: example;
+  animation-duration: 4s;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+}
+
+.title2 {
+	float:right;
+	background-color:#EAEDED   ;
+	
+  	border-radius: 30px 0px 30px 0px;
+	box-shadow: 4px 3px 8px 1px #969696;
+	-webkit-box-shadow: 4px 3px 8px 1px #969696; 
+	margin-top: 70px;
+	width: 700px;
+	text-shadow: 1px 1px 1px black;
+	margin-right: 20px;
+	padding: 10px 15px;
+	/*   border: 1px solid black; */ */
+	/* -webkit-box-shadow: 4px 3px 8px 1px #969696; */
+ 	
+}
+
+.takeTest {
+	margin-left: 165px;
+}
+
+.img2 {
+	float: right;
+}
+
+.clearfix::after {
+	content: "";
+	clear: both;
+	display: table;
+}
+
+
+
+
+@keyframes example {
+  0%   {background-color:skyblue; left:0px; top:0px;}
+  25%  {background-color:skyblue; left:200px; top:0px;}
+  
+  75%  {background-color:#E5E4E2; left:0px; top:0px;}
+   
+}
+
+
+ 
+.container {
+   margin-top: 150px;
+  padding: 0 16px;
+}
+
+.psst {
+  background-color: #2a4365;
+  color: #fff;
+  text-align: center;
+  padding: 16px;
+}
+
+.insurancePlan {
+	margin-top:450px;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+ 
+
+ .footer {
+	flex-shrink: 0;
+	position: bottom;
+  	bottom: 0;
+	width:100%;
+	height: 60px;  
+	background-color: #3090C7;
+	text-align: center;
+	font-weight: bold;
+	color: white;
+
+}  
+
+.content__container__list__item{
+	
+	font-size:20px;
+	text-shadow: 1px 1px 1px darkgrey;
+}
+
+.container {
+ margin-left:200px;
+margin-right: 50px;
+ margin-top:-5px;
+display: flex;
+justify-content: center;
+}
+</style>
+	<!-- <link rel="stylesheet" href="HamburgerButton.css"/> -->
+
+</h:head>
+
+<h:body>
+	<div>
+
+		<nav class="navbar" >
+			<h:outputLink value="HomePage.xhtml" class="nav-brand" style="color:white; 
+			font-size:45px;">
+			 <b>Health Care</b></h:outputLink>
+			<ul>
+
+				<li class="dropdown"><h:outputLink value="#" class="nav-link" ><b>Enrollment</b></h:outputLink>
+					<div class="dropdown-content">
+						<h:outputLink value="Add.xhtml">Signup as Provider</h:outputLink>
+					</div></li>
+				<li class="dropdown"><h:outputLink value="#" class="nav-link">
+						<b>Login</b>
+					</h:outputLink>
+					<div class="dropdown-content">
+						<h:outputLink value="Login.xhtml">Login as provider</h:outputLink>
+						<h:outputLink value="Login.xhtml">Login as Patient</h:outputLink>
+						<h:outputLink value="Login.xhtml">Login as Admin</h:outputLink>
+					</div></li>
+
+				<li><div style="margin-top: 10px;">
+						<h:outputLink value="Summary.xhtml" style="margin-top:120px;"><b>Summary</b></h:outputLink>
+					</div></li>
+
+
+
+
+				<li><div style="margin-top: 10px;">
+						<h:outputLink value="ProviderContactUs.xhtml" style="margin-top:20px;"><b>Contact Us</b></h:outputLink>
+					</div></li>
+			</ul>
+
+		</nav>
+		<nav class="navbar" style="background-color: lightgrey; box-shadow: 4px 4px 4px darkgrey;">
+
+			<ul>
+
+
+				<li class="dropdown"><h:outputLabel value="Cities"
+						style="Color: black;" /> <h:selectOneMenu
+						class="btn btn-secondary dropdown-toggle" label="our locations"
+						style="margin-left:10px;">
+						<f:selectItems value="#{cityDrop.citites}" />
+					</h:selectOneMenu></li>
+
+
+				<li class="dropdown"><h:outputLink value="#" class="nav-link">Patient resources</h:outputLink>
+					<div class="dropdown-content">
+						<h:outputLink value="Add.xhtml">Book an appointment</h:outputLink>
+						<h:outputLink value="Login.xhtml">Insurances</h:outputLink>
+						<h:outputLink value="Login.xhtml">Policies</h:outputLink>
+						<h:outputLink value="Login.xhtml">Claim for insurance</h:outputLink>
+						<h:outputLink value="Login.xhtml">Request for an appointment</h:outputLink>
+
+
+					</div></li>
+
+				<li><div style="margin-top: 11px;">
+						<h:outputLink value="Summary.xhtml" style="margin-top:120px;">Providers</h:outputLink>
+					</div></li>
+
+			</ul>
+
+		</nav>
+
+</div>
+
+
+
+		<div class="title">
+			<h1  >
+				RETHINK Your Health Your mind, body and life 
+			</h1>
+			<ul class="content__container__list">
+      <li class="content__container__list__item">Weakness !</li>
+      <li class="content__container__list__item">Fever !</li>
+      <li class="content__container__list__item">Hormonal imbalance !</li>
+      
+    </ul>
+
+			<br />
+			<h:outputLink style="  font-size: 20px; margin-left:20px;" shape="circle"
+				value="Add.xhtml">Take test</h:outputLink>
+
+
+		</div>
+		
+		<div class="title2">
+			
+			<div class="content">
+  <div class="content__container">
+    <p class="content__container__text" style="font-size: 30px;">
+     <b> Check you insurances...</b>
+    </p>
+    
+    <ul class="content__container__list" >
+      <li class="content__container__list__item">Claim for insurance !</li>
+      <li class="content__container__list__item">Update insurance details !</li>
+      <li class="content__container__list__item">Submit insurance details !</li>
+      <li class="content__container__list__item">Check status !</li>
+    </ul>
+  </div>
+</div>
+
+			<br />
+			<h:outputLink style=" border:1px solid black; border-width:5px; margin-left:40px;  font-size: 20px;" shape="circle"
+				value="Add.xhtml" >Check your status</h:outputLink>
+
+
+		</div>
+		
+	<div class="insurancePlan" >
+	<h3>Insurance partner</h3>
+<img src="https://www.bajajallianz.com/content/dam/bagic/ab-health-insurance/health-insurance.png"	/>
+<P style="font-size:18px; text-shadow: 1px 1px 1px darkgrey;">
+X-PARTNER is one of the most trusted standalone health insurance partners.
+ We have curated affordable and comprehensive healthcare policies catering to the different needs of 
+ our consumers. 
+ We aim to give every Indian the confidence to access best healthcare by providing health 
+ insurance plans as per your needs. Our innovative and comprehensive health policies have 
+ made us one of the leading health insurance and medical insurance company in India.</P>
+ <h:outputLink value="Add.xhtml">Insurance policies</h:outputLink>
+	</div>
+   
+ <hr/>
+ 
+ <div class="provider" style="margin-top:40px; padding-left: 50px; padding-right: 50px">
+ <h3>Join as a provider</h3>
+ 	<img height="250px;" src="https://static.vecteezy.com/system/resources/previews/017/415/574/original/medical-team-surgeons-with-surgical-gowns-cartoon-characters-png.png"/>
+ 
+ 
+ <br/><br/>
+ <P style="font-size:18px; text-shadow: 1px 1px 1px darkgrey;">
+Need a change in career ? Join Health care with smooth a joining procedures. Enrollment for provider
+consists of only few basic details. Various benefits are provided to newly joined providers including 
+insurances, time flexibilities and incentive benefits etc. Experienced provider are really appreciated
+to this organization.
+
+<h:outputLink value="Add.xhtml">Join this organization</h:outputLink>
+</P>
+
+
+ </div><hr/>
+ 
+ <div class="provider" style="margin-top:40px; padding-left: 50px; padding-right: 50px">
+ <h3>Find out bills details, payment history.</h3>
+ 	<img height="250px;" src="https://i1.wp.com/spyn.co/blog/wp-content/uploads/cash-payment-icon.png?ssl=1"/>
+ 
+ 
+ <br/><br/>
+ <P style="font-size:18px; text-shadow: 1px 1px 1px darkgrey;">
+Find your payment history and bill details. You can search your insurance policy details and you
+premium details. If you want to renew the policies or withdraw the policies go through this link given below.
+
+<h:outputLink value="Add.xhtml">Check details</h:outputLink>
+</P>
+
+
+ </div><hr/>
+ 
+  
+		
+		 <div class="footer">
+		<p>Copyright © 2023 Healthcare Clinic. All rights reserved.</p>
+	</div>  
+		 
+</h:body>
+
+</html>

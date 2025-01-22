@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<style>
+.card {
+	padding-left: 150px;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	padding: 10px;
+	background-color: #fff;
+	border-radius: 5px;
+	margin-right: 450px;
+	margin-left: 150px;
+}
+</style>
+</h:head>
+
+<h:body
+	style="background-image: url(#{request.contextPath}/images/02.jpg); 
+  background-repeat: no-repeat;height: 600px;
+  background-size:cover;">
+	<div id="header">
+		<ui:include src="Navbar.xhtml"></ui:include>
+	</div>
+	<div style="padding-left: 150px;">
+		<h3>Contact On</h3>
+	</div>
+	<div class="card">
+		<p>
+			Healthcare Clinic<br /> Rushikonda<br /> Vizag, Andhra Pradesh
+			530048<br /> Phone: (555) 555-5555<br /> Email:
+			info@healthcareclinic.com<br />
+			<br /> Hours of Operation:<br /> Monday - Friday: 9:00am - 5:00pm<br />
+			Saturday: 9:00am - 1:00pm<br /> Sunday: Closed<br />
+			<br /> Copyright © 2023 Healthcare Clinic. All rights reserved.<br />
+
+			Privacy Policy | Terms of Use<br />
+			<br /> Follow Us:<br />
+			<p:chip label="Facebook" icon="pi pi-facebook" styleClass="mr-2" />
+			&nbsp;
+			<p:chip label="Twitter" icon="pi pi-twitter" styleClass="mr-2" />
+			&nbsp;
+			<p:chip label="Instagram" icon="pi pi-instagram" styleClass="mr-2" />
+			<br />
+		</p>
+	</div>
+	<div>
+		<ui:include src="/Footer.xhtml" />
+	</div>
+</h:body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Show Procedure</title>
+
+</h:head>
+
+<h:body style="background-color:dodgerblue;">
+	<div>
+		<ui:include src="/Navbar.xhtml" />
+	</div>
+	<h:form>
+		<p:growl id="infoMsg" showSummary="true" life="7000" globalOnly="true" />
+		<center>
+			<h2>
+				<h:outputText value="Procedure Details" />
+			</h2>
+		</center>
+		<p:dataTable var="Pdetails" value="#{procDao.showProcedureDetails()}"
+			paginator="true" rows="10" paginatorPosition="bottom"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink}
+                     {PreviousPageLink} {PageLinks} {NextPageLink}
+                     {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15">
+
+			<p:column headerText="Procedure_Id" width="105">
+				<h:outputText value="#{Pdetails.procedureID}" />
+			</p:column>
+
+			<p:column headerText="Procedure_Code" width="125">
+				<h:outputText value="#{Pdetails.procedureCode}" />
+			</p:column>
+
+			<p:column headerText="HealthID" width="90">
+				<h:outputText value="#{Pdetails.healthId}" />
+			</p:column>
+
+			<p:column headerText="MedicineID" width="90">
+				<h:outputText value="#{Pdetails.itemId}" />
+			</p:column>
+
+			<p:column headerText="Procedure_Type">
+				<h:outputText value="#{Pdetails.procedureType}" />
+			</p:column>
+
+			<p:column headerText="ProcedureBeginDate" width="140">
+				<h:outputText value="#{Pdetails.procedureBeginDate}">
+					<f:convertDateTime pattern="yyyy-MM-dd" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="ProcedureEndDate">
+				<h:outputText value="#{Pdetails.procedureEndDate}">
+					<f:convertDateTime pattern="yyyy-MM-dd" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="ProcedureDescription">
+				<h:outputText value="#{Pdetails.procedureDescription}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+
+
+</h:body>
+
+
+</html>

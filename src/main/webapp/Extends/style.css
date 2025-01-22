@@ -1,0 +1,46 @@
+body {
+	background-image: url('../Img/hero-bg.jpg');
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	font-family: sans-serif;
+}
+
+.ui-datatable-empty-message {
+	color: red !important;
+	font-size: 18px;
+	font-family: "Times New Roman", Times, serif;
+	font-weight: bold;
+}
+
+.ui-datatable {
+	background-color: navy;
+}
+
+.green {
+	color: #008000;
+}
+
+.red {
+	color: red;
+}
+
+.ui-datatable-empty-message{
+  
+   color: red ;
+   font-size: 18px;
+   font-family: "Times New Roman", Times, serif;
+   font-weight: bold;
+
+}
+
+.ui-datatable
+{
+  
+    background-color: navy;
+}
+.ui-datatable-data {
+    font-family: sans-serif;
+   
+    color: blue;
+}

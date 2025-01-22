@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style>
+body {
+	margin: 0px;
+	padding: 0px;
+	background-size: cover;
+	background-repeat:no-repeat;
+	background-image: url(#{request.contextPath}/images/02.png);
+}
+
+body .ui-panel .ui-panel-content {
+	color: #000000;
+	overflow: auto;
+	border: 1px solid darkgrey;
+	border-radius: 30px 1px 1px 30px;
+}
+
+.navbar {
+	background-color: #3090C7;
+	color: #fff;
+	padding: 15px 20px;
+}
+
+.nav-brand {
+	font-size: 25px;
+	font-style: italic;
+	font-weight: bold;
+	text-decoration: none;
+	color: #fff;
+}
+
+input[type=text]:focus {
+	transition: width 0.4s ease-in-out;
+}
+
+.pi {
+	padding: 1rem;
+	font-size: 1rem
+}
+
+.signupForm {
+	margin-left: 85px;
+	margin-top: 10px;
+	box-shadow: 10px 10px 5px darkgrey;
+	width: 500px;
+	border: 2px solid lightgrey;
+	border-radius: 30px 1px 1px 30px;
+}
+</style>
+	<script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+</script>
+</h:head>
+<h:body>
+	<div>
+		<nav class="navbar">
+			<h:outputLink value="HomePage.xhtml" class="nav-brand">Health Care</h:outputLink>
+		</nav>
+
+		<f:facet name="last">
+			<h:outputStylesheet library="webjars"
+				name="font-awesome/5.12.0/css/all.min-jsf.css" />
+			<h:outputStylesheet library="webjars"
+				name="font-awesome/5.12.0/css/v4-shims.min-jsf.css" />
+		</f:facet>
+
+		<div class="signupForm">
+			<h:form>
+				<p:panel id="panel-signup">
+
+					<!-- enable focus component -->
+					<p:focus context="panel-signup" />
+					<h1 style="color: Blue; width: 400px; margin-top: 5px;">
+						<b>Reset Password</b>
+					</h1>
+					<hr />
+					
+					<div class="box">
+						<p:outputLabel value="Username" styleClass="col-fixed"
+							style="width:350px; margin-left:57px;">
+							<span style="color: red;"> * </span>
+						</p:outputLabel>
+						<div class="col">
+							   <span class="pi pi-user"></span>
+							<p:inputText id="userName" readonly="true" required="true" label="userName"
+								size="38" requiredMessage="Please enter your username."
+								value="#{login.username}">
+								<f:validator validatorId="com.java.admin.UserValidation" />
+							</p:inputText>
+							<p:watermark for="userName" value="Username " />
+							<br />
+							<h:message for="userName" style="color:red;margin-left:60px" />
+						</div>
+					</div>
+					
+					<div class="box">
+						<p:outputLabel value=" Create Password" styleClass="col-fixed"
+							style="width:350px; margin-left:57px;">
+							<span style="color: red;"> * </span>
+						</p:outputLabel>
+						<div class="col">
+							   <span class="pi pi-lock"></span>
+							<p:password id="password" required="true" label="password"
+								size="35" requiredMessage="Please enter your New password."
+								match="confirmPassword" value="#{login.password}" maxlength="13"
+								toggleMask="true"></p:password>
+							<p:watermark for="password" value="Password " />
+							<br />
+							<h:message for="password" style="color:red;margin-left:60px" />
+						</div>
+					</div>
+					
+					<div class="box">
+						<p:outputLabel value="ConfirmPassword" styleClass="col-fixed"
+							style="width:400px; margin-left:57px;">
+							<span style="color: red;"> * </span>
+						</p:outputLabel>
+						<div class="col">
+							  <span class="pi pi-lock"></span>
+							<p:password id="confirmPassword" required="true" size="35"
+								requiredMessage="Please confirm New password."
+								validatorMessage="Password should contain min 8, max 13 
+					, one special,  one upper and lower case letter"
+						
+								maxlength="13" label="confirmPassword" value="#{login.password}"
+								toggleMask="true">
+								<f:validateRegex
+									pattern="(?=^.{8,13}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" />
+							</p:password>
+							<p:watermark for="confirmPassword" value="Confirm New password " />
+							<br />
+							<p:message for="confirmPassword"
+								style="color:red; margin-left:60px" />
+						</div>
+					</div>
+				
+					<p:commandButton value="Change Password" style="margin-left:60px"
+						action="#{lDao.resetPassword(login)}" ajax="false" /> 
+					  <br />
+					
+				</p:panel>
+
+			</h:form>
+		</div>
+		<div>
+			<ui:include src="/Footer.xhtml" />
+		</div>
+	</div>
+</h:body>
+</html>

@@ -1,0 +1,126 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head> <style>
+body {
+	background-image: url("Images/01.png");
+}
+</style>
+</h:head>
+
+<h:form>
+	<div>
+		<ui:include src="/Navbar.xhtml" />
+	</div>
+   		
+    <center>
+
+		<h2 style="margin-top: 0px">
+			<h:outputText value="Appointment">
+
+			</h:outputText>
+		</h2>
+	</center> 
+    
+       <center>
+		<p:outputLabel for="inline2" value="Choose Appointment date :" />
+		<p:calendar id="inline2" value="#{oDao.filter}"
+			placeholder="Select Date..." readonlyInput="true"
+			pattern="yyyy-MM-dd" mode="popup" navigator="true"
+			onchange="submit()" valueChangeListener="#{oDao.changeMe}">  
+    
+   <p:ajax event="dateSelect" listener="#{oDao.changeMe}" />
+
+		</p:calendar>
+		<br> </br> <br></br>
+
+
+		<h:panelGrid columns="6" cellpadding="5">
+			<p:outputLabel for="status" value="Status:" />
+			<p:selectOneMenu id="status" value="#{select.selectType}"
+				style="width:150px">
+
+				<f:selectItem itemLabel="Pending" itemValue="Pending"
+					noSelectionOption="true" />
+				<f:selectItem itemLabel="Confirm" itemValue="Confirm"
+					noSelectionOption="true" />
+				<f:selectItem itemLabel="Cancel" itemValue="Cancel"
+					noSelectionOption="true" />
+				<f:selectItems value="#{dropdown.status}" />
+			</p:selectOneMenu>
+
+
+			<h:commandButton value="Submit"
+				style="background-color:green; color:white; padding:5px"
+				action="#{oDao.display(select.selectType)}" icon="ui-icon-check" />
+
+		</h:panelGrid>
+		<br></br> <br></br>
+		<p:dataTable value="#{oDao.listAppoitment}" var="o" paginator="true"
+			rows="100" paginatorPosition="bottom"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink}
+                     {PreviousPageLink} {PageLinks} {NextPageLink}
+                     {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15">
+
+			<p:column>
+				<f:facet name="header">Appointment ID</f:facet>
+				<h:outputText value="#{o.aId}"></h:outputText>
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">Receipent ID</f:facet>
+				<h:outputText value="#{o.healthId}"></h:outputText>
+			</p:column> 
+    
+    <p:column styleClass="#{o.status}">
+				<f:facet name="header">Appointment-Status</f:facet>
+				<h:outputText value="#{o.status}"></h:outputText>
+			</p:column> 
+         
+    <p:column>
+				<f:facet name="header">Appointment Date</f:facet>
+				<h:outputText value="#{o.appDate}"></h:outputText>
+			</p:column> 
+    
+    <p:column>
+				<f:facet name="header">Start-Time</f:facet>
+				<h:outputText value="#{o.startTime}"></h:outputText>
+			</p:column>  
+    
+    <p:column>
+				<f:facet name="header">End-Time</f:facet>
+				<h:outputText value="#{o.endTime}"></h:outputText>
+			</p:column> 
+ 
+    <p:column>
+				<f:facet name="header">Confirm</f:facet>
+				<h:commandButton value="Confirm"
+					disabled="#{oDao.check(o.status,o.appDate)}"
+					action="#{oDao.approvedStatusDao(o)}">
+				</h:commandButton>
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">Reject</f:facet>
+				<h:commandButton value="Reject"
+					disabled="#{oDao.check(o.status,o.appDate)}"
+					action="#{oDao.rejectStatusDao(o)}">
+				</h:commandButton>
+			</p:column> 
+			
+			<p:column>
+				<f:facet name="header">View Insurance</f:facet>
+				<h:commandButton value="View"
+					disabled="#{oDao.check1(o.status,o.appDate)}"
+					action="#{iDao.searchRecipientInfo(o.healthId)}">
+				</h:commandButton>
+			</p:column> 
+			
+   </p:dataTable>
+	</center>
+</h:form>
+</html>

@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>Add new Provider</title>
+
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+		crossorigin="anonymous"></link>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+		crossorigin="anonymous"></script>
+	<style>
+body {
+	/* background-color: AZURE; */
+	/* background-image:
+		url(https://thumbs.dreamstime.com/b/coronavirus-doctor-working-hospital-copy-text-background-banner-doctors-hospitals-fighting-male-protective-suit-mask-178767502.jpg);
+ */
+	background-size: cover; background-repeat : no-repeat;
+	background-image: url(#{request.contextPath}/images/02.jpg);
+	background-repeat: no-repeat;
+}
+
+input[type=text]:focus {
+	transition: width 0.4s ease-in-out;
+}
+
+textarea {
+	/* padding: 60px 120px;
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	background-color: #f8f8f8;
+	resize: none; */
+	
+}
+
+.signupForm {
+	margin-left: 120px;
+	margin-top: 30px;
+	box-shadow: 10px 10px 5px darkgrey;
+	width: 500px;
+	border: 2px solid lightgrey;
+	border-radius: 30px 1px 1px 30px;
+	/* box-shadow: 0px 9px 46px 8px rgba(0, 0, 0, 0.12), 0px 24px 38px 3px
+		rgba(0, 0, 0, 0.14), 0px 11px 15px rgba(0, 0, 0, 0.2); */
+}
+</style>
+
+</h:head>
+<h:body>
+
+	<f:facet name="last">
+		<h:outputStylesheet library="default" name="css/style.css" />
+	</f:facet>
+
+
+
+
+	<div class="signupForm">
+		<h:form>
+			<div
+				style="height: 550px; visibility: visible !important; overflow: auto; border: 1px solid darkgrey; border-radius: 30px 1px 1px 30px;">
+				<p:panel id="panel-signup">
+					<!-- enable focus component -->
+
+					<p:focus />
+					<h1
+						style="color: #1E90FF; width: 450px; margin-top: 20px; text-shadow: 2px 2px 3px black">
+						<b>Provider Enrollment</b>
+					</h1>
+					<hr />
+					<br />
+
+
+					<p style="font-size: 20px; text-shadow: 2px 2px 4px darkgrey;">Demographic
+						information</p>
+					<hr />
+					<div class="box">
+						<p:outputLabel for="providerFname" value="First name"
+							styleClass="col-fixed" style="width:400px"></p:outputLabel>
+
+						<p:inputText id="providerFname" required="true"
+							label="Please Enter provider first Name" size="40"
+							requiredMessage="Please enter provider's first name."
+							value="#{provider.fristName}"
+							validatorMessage="First name must contain alphabets only">
+							<f:validator
+								validatorId="com.java.project.ProviderNameValidation" />
+							<f:validateRegex
+								pattern="(?i)(^[a-z]+)[a-z .,-]((?! .,-)$){1,25}$" />
+						</p:inputText>
+						<p:watermark for="providerFname" />
+						<br />
+						<h:message for="providerFname" style="color:red;" />
+					</div>
+
+					<br />
+					<div class="box">
+						<p:outputLabel for="providerMname" value="Middle name"
+							styleClass="col-fixed" style="width:400px"></p:outputLabel>
+
+						<p:inputText id="providerMname" required="false"
+							label="Please Enter provider middle Name" size="40"
+							value="#{provider.middleName}"
+							validatorMessage="Middle name must contain alphabets only">
+							<f:validator
+								validatorId="com.java.project.ProviderNameValidation" />
+							<f:validateRegex
+								pattern="(?i)(^[a-z]+)[a-z .,-]((?! .,-)$){1,25}$" />
+
+						</p:inputText>
+						<p:watermark value="Optional" for="providerMname"></p:watermark>
+						<br />
+						<h:message for="providerMname" style="color:red;" />
+					</div>
+
+					<br />
+
+					<div class="box">
+						<p:outputLabel for="providerLname" value="Last name"
+							styleClass="col-fixed" style="width:400px"></p:outputLabel>
+
+						<p:inputText id="providerLname" required="true"
+							label="Please Enter provider last Name" size="40"
+							requiredMessage="Please enter provider's last name."
+							value="#{provider.lastName}"
+							validatorMessage="Last name must contain alphabets only">
+							<f:validator
+								validatorId="com.java.project.ProviderNameValidation" />
+
+							<f:validateRegex
+								pattern="(?i)(^[a-z]+)[a-z .,-]((?! .,-)$){1,25}$" />
+
+						</p:inputText>
+						<p:watermark for="providerLname" />
+						<br />
+						<h:message for="providerLname" style="color:red;" />
+
+					</div>
+					<Br />
+
+					<div class="box">
+						<p:outputLabel for="license" value="License id"
+							styleClass="col-fixed" style="width:400px"></p:outputLabel>
+
+						<p:inputText id="license" required="true"
+							label="Please Enter provider license" size="40"
+							requiredMessage="Please enter provider's license number."
+							validatorMessage="Invalid license id"
+							value="#{provider.licenseId}">
+							<!-- <f:validateRegex pattern="^([SW])w+([0-9]{4})$" /> -->
+							<f:validator
+								validatorId="com.java.project.LicenseDuplicationCheck"></f:validator>
+							<f:validator validatorId="com.java.project.LicenseVerification" />
+						</p:inputText>
+
+						<p:watermark for="license" value="example: 1209" />
+						<br />
+						<h:message for="license" style="color:red;" />
+
+					</div>
+					<Br />
+
+					<div class="box">
+						<p:outputLabel for="hospital" value="Hospital name"
+							styleClass="col-fixed" style="width:400px"></p:outputLabel>
+
+						<p:inputText id="hospital" required="true"
+							value="#{provider.hospital}" label="Please Enter provider aadhar"
+							size="40"
+							validatorMessage="Cannot contain digits or special characters"
+							requiredMessage="Please enter provider's Hospital name.">
+							<f:validator validatorId="com.java.HospitalValidation" />
+							<!-- <f:validateRegex pattern="/^[A-Za-z]+$/"></f:validateRegex> -->
+
+						</p:inputText>
+						<p:watermark for="hospital" value="example: Apollo" />
+						<br />
+						<h:message for="hospital" style="color:red;" />
+					</div>
+
+					<br />
+
+					<div class="box">
+						<p:outputLabel for="aadhar" value="Aadhar number"
+							styleClass="col-fixed" style="width:400px"></p:outputLabel>
+
+						<p:inputText id="aadhar" required="true"
+							value="#{provider.aadharNo}" label="Please Enter provider aadhar"
+							size="40"
+							requiredMessage="Please enter provider's aadhar number.">
+							<f:validator validatorId="com.java.project.AadharVerification" />
+
+							<f:validateRegex pattern="^(\d{12}|\d{16})$" />
+
+
+						</p:inputText>
+						<p:watermark for="aadhar" value="example: 840078674567" />
+						<br />
+						<h:message for="aadhar" style="color:red;" />
+					</div>
+
+					<Br />
+					<div class="box">
+						<p:outputLabel for="gender" value="Gender:"></p:outputLabel>
+						<p:selectOneRadio id="gender" value="#{provider.providerGender}"
+							required="true" layout="grid" columns="3" styleClass="grid-radio"
+							requiredMessage="Please Select Gender">
+
+							<f:selectItems value="#{gDrop.gender}" var="gender" />
+
+						</p:selectOneRadio>
+						<br />
+						<h:message for="gender" style="color:red;" />
+					</div>
+
+
+
+					<br />
+					<div class="box">
+						<p:outputLabel for="dob" value="Birth date" styleClass="col-fixed"
+							style="width:400px"></p:outputLabel>
+						<p:calendar id="dob" required="true"
+							label="Please Enter Date Of Birth" size="40"
+							requiredMessage="Please enter Date of Birth"
+							maxdate="#{currentDate}" value="#{provider.providerDob}"
+							validatorMessage="Invalid date. Date format: dd:mm:yyyy"
+							yearRange="-100:+0" navigator="true" pattern="dd-MM-yyyy">
+
+							<f:validator validatorId="dobValidator" />
+						</p:calendar>
+						<p:watermark for="dob" value="DOB *" />
+						<br />
+						<h:message for="dob" style="color:red;" />
+
+
+
+					</div>
+					<br />
+
+
+					<div class="box">
+						<p:outputLabel for="providerPhoneNo" value="Phone number"
+							styleClass="col-fixed" style="width:400px"></p:outputLabel>
+						<p:inputText id="providerPhoneNo" required="true"
+							label="Please Enter provider Phone No" size="40"
+							requiredMessage="Please enter provider Phone."
+							value="#{provider.phoneNo}"
+							validatorMessage="Phone number must be 10 digits">
+							<f:validator validatorId="com.java.project.PhoneNumberCheck" />
+							<f:validator validatorId="com.java.project.PhoneVerification"></f:validator>
+							<f:validateRegex pattern="[1-9]{1}[0-9]{9}$" />
+						</p:inputText>
+						<p:watermark for="providerPhoneNo" value="providerPhoneNo*" />
+						<br />
+						<h:message for="providerPhoneNo" style="color:red;" />
+					</div>
+					<br />
+
+					<div class="box">
+						<p:outputLabel for="providerEmail" value="Email address"
+							styleClass="col-fixed" style="width:400px"></p:outputLabel>
+						<p:inputText id="providerEmail" required="true"
+							label="Please Enter provider Email" size="40"
+							requiredMessage="Please enter provider Email."
+							value="#{provider.providerEmailId}"
+							validatorMessage="invalid email id (format: exampl@xyz.com)">
+							<f:validator validatorId="com.java.project.EmailVerification"></f:validator>
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"></f:validateRegex>
+
+						</p:inputText>
+						<p:watermark for="providerEmail" value="providerEmail *" />
+						<br />
+						<h:message for="providerEmail" style="color:red;" />
+					</div>
+					<br />
+
+					<div class="box">
+						<p:outputLabel for="username" value=" New username"
+							styleClass="col-fixed" style="width:400px"></p:outputLabel>
+
+						<p:inputText id="username" required="true"
+							label="Please Enter username" size="40"
+							requiredMessage="Please enter username."
+							value="#{provider.username}"
+							validatorMessage="atleast 8 characters with numericals">
+							<f:validator validatorId="com.java.project.uniqueColumnValidator" />
+							<f:validateRegex pattern="^[A-Za-z][A-Za-z0-9_]{7,29}$" />
+						</p:inputText>
+						<p:watermark for="username" value="username *" />
+						<br />
+						<h:message for="username" style="color:red;" />
+					</div>
+					<br />
+
+					<br />
+					<p style="font-size: 20px; text-shadow: 2px 2px 4px darkgrey;">Specialization</p>
+					<hr />
+
+					<!-- Provider TYPE -->
+					<div class="box">
+						<p:outputLabel for="Specialization" value="Provider type: " />
+						<br />
+						<h:selectOneMenu id="Specialization" required="true"
+							styleClass="btn btn-light dropdown-toggle" type="button"
+							data-toggle="Specialization" value="#{provider.specialization}"
+							style="width:250px; border:2px solid skyblue;"
+							requiredMessage="pleasae select a type.">
+
+							<f:selectItems value="#{pTypes.providerTypes}" />
+						</h:selectOneMenu>
+						<br />
+						<h:message for="Specialization" style="color:red;"></h:message>
+
+					</div>
+					<br />
+					<!-- EDUCATION -->
+					<div class="box">
+						<p:outputLabel for="Education" value="Provider Education" />
+						<br />
+						<h:selectOneMenu id="Education" required="true"
+							styleClass="btn btn-light dropdown-toggle" type="button"
+							data-toggle="Education" value="#{provider.education}"
+							style="width:250px; border:2px solid skyblue;"
+							requiredMessage="pleasae select a type.">
+
+							<f:selectItems value="#{educationDrop.education}" />
+						</h:selectOneMenu>
+						<br />
+						<h:message for="Education"></h:message>
+
+					</div>
+					<br />
+
+
+					<!-- Category -->
+					<div class="box">
+						<p:outputLabel for="Category" value="Provider Category" />
+						<br />
+						<h:selectOneMenu id="Category" required="true"
+							styleClass="btn btn-light dropdown-toggle" type="button"
+							data-toggle="Category" value="#{provider.category}"
+							style="width:250px; border:2px solid skyblue;"
+							requiredMessage="pleasae select a type.">
+
+							<f:selectItems value="#{categoryDrop.category}" />
+						</h:selectOneMenu>
+						<br />
+						<h:message for="Category" style="color:red;"></h:message>
+
+					</div>
+					<Br />
+
+					<!-- Council -->
+					<div class="box">
+						<p:outputLabel for="Council" value="Provider Council" />
+						<br />
+						<h:selectOneMenu id="Council" required="true"
+							styleClass="btn btn-light dropdown-toggle" type="button"
+							data-toggle="Council" value="#{provider.council}"
+							style="width:250px; border:2px solid skyblue;"
+							requiredMessage="pleasae select a type.">
+
+							<f:selectItems value="#{councilDrop.council}" />
+						</h:selectOneMenu>
+						<Br />
+						<h:message for="Council" style="color:red;"></h:message>
+					</div>
+					<br />
+
+					<!-- Speciality -->
+					<div class="box">
+						<p:outputLabel for="Speciality" value="Provider speciality" />
+						<br />
+						<h:selectOneMenu id="Speciality" required="true"
+							styleClass="btn btn-light dropdown-toggle" type="button"
+							data-toggle="Speciality" value="#{provider.speciality}"
+							style="width:250px; border:2px solid skyblue;"
+							requiredMessage="pleasae select a type.">
+
+							<f:selectItems value="#{specialityDrop.speciality}" />
+						</h:selectOneMenu>
+						<br />
+						<h:message for="Speciality" style="color:red;"></h:message>
+					</div>
+					<br />
+
+
+					<div class="box">
+						<p:outputLabel for="experience" value="Experience"
+							styleClass="col-fixed" style="width:400px"></p:outputLabel>
+						<br />
+						<p:inputText id="experience" required="true"
+							label="Please your experience " size="40"
+							requiredMessage="Please enter experience."
+							validatorMessage="invalid experience"
+							value="#{provider.experience}">
+							<f:validator validatorId="ExperienceValidation" />
+						</p:inputText>
+						<p:watermark for="experience" value="for ex: 5 *" />
+						<Br />
+						<h:message for="experience" style="color:red;" />
+					</div>
+					<br />
+
+					<br />
+					<p style="font-size: 20px; text-shadow: 2px 2px 4px darkgrey;">Address
+						and Security</p>
+					<hr />
+					<div class="box">
+						<p:outputLabel for="states" value="State" />
+						<br />
+						<h:selectOneMenu id="states" required="true"
+							styleClass="btn btn-light dropdown-toggle" type="button"
+							data-toggle="states" value="#{provider.state}"
+							style="width:250px; border:2px solid skyblue;"
+							requiredMessage="pleasae select a state.">
+
+							<f:selectItems value="#{sDrop.states}" />
+						</h:selectOneMenu>
+						<Br />
+						<h:message for="states" style="color:red;"></h:message>
+					</div>
+					<br />
+
+
+					<!--  city -->
+					<div class="box">
+						<p:outputLabel for="city" value="City" styleClass="col-fixed"
+							style="width:400px"></p:outputLabel>
+						<p:inputText id="city" required="true"
+							label="Please your experience " size="40"
+							requiredMessage="Please enter your city "
+							value="#{provider.city}">
+							<f:validator validatorId="CityValidation" />
+						</p:inputText>
+						<p:watermark for="city" value="city *" />
+						<br />
+						<h:message for="city" style="color:red;" />
+					</div>
+					<br />
+
+					<!--  Pincode  -->
+					<div class="box">
+						<p:outputLabel for="pincode" value="Pincode"
+							styleClass="col-fixed" style="width:400px"></p:outputLabel>
+
+
+						<p:inputText id="pincode" required="true"
+							label="Please your experience " size="40"
+							requiredMessage="Invalid pincode" value="#{provider.pincode}"
+							validatorMessage="invalide pincode">
+							<f:validator validatorId="PincodeValidation"></f:validator>
+							<f:validateRegex pattern="^[1-9][0-9]{5}$" />
+						</p:inputText>
+						<p:watermark for="pincode" value="pincode *" />
+						<br />
+						<h:message for="pincode" style="color:red;"></h:message>
+
+
+					</div>
+
+					<br />
+
+					<!--  street name -->
+					<div class="box">
+						<p:outputLabel for="streetname" value="Street Name"
+							styleClass="col-fixed" style="width:400px"></p:outputLabel>
+
+						<p:inputText id="streetname" required="false"
+							label="Please enter streetname " size="40"
+							value="#{provider.streetName}">
+						</p:inputText>
+						<p:watermark for="streetname" value="Optional" />
+					</div>
+
+					<br />
+
+
+					<!--  address1 name -->
+					<div class="box">
+						<p:outputLabel for="address1" value="Address 1"
+							styleClass="col-fixed" style="width:400px"></p:outputLabel>
+
+						<p:inputText id="address1" required="true"
+							label="Please your address " size="40"
+							requiredMessage="Please enter your addrees 1 "
+							value="#{provider.address1}">
+						</p:inputText>
+						<p:watermark for="address1" value="address1 *" />
+						<br />
+						<h:message for="address1" style="color:red;" />
+					</div>
+					<br />
+
+					<!--  address1 name -->
+					<div class="box">
+						<p:outputLabel for="address2" value="Address 2"
+							styleClass="col-fixed" style="width:400px"></p:outputLabel>
+
+						<p:inputText id="address2" required="false"
+							label="Please your address " size="40"
+							value="#{provider.address2}">
+						</p:inputText>
+						<p:watermark for="address2" value="Optional" />
+						<br />
+						<h:message for="address2" style="color:red;" />
+					</div>
+					<br />
+
+					<!--  Landmark -->
+					<div class="box">
+						<p:outputLabel for="landmark" value="Landmark"
+							styleClass="col-fixed" style="width:400px"></p:outputLabel>
+
+						<p:inputText id="landmark" required="true"
+							label="Please your landmark " size="40"
+							requiredMessage="Please enter landmark"
+							value="#{provider.landMark}">
+						</p:inputText>
+						<p:watermark for="landmark" value="landmark *" />
+						<br />
+						<h:message for="landmark" style="color:red;" />
+					</div>
+					<br />
+
+					<div class="box">
+						<p:outputLabel value="Select Question 1: " />
+						<br />
+
+						<h:selectOneMenu id="question" value="#{provider.questions}"
+							class="btn btn-light dropdown-toggle" type="button"
+							data-toggle="question"
+							style="width:250px; border:2px solid skyblue;">
+
+							<f:selectItems value="#{qDrop.questions}" />
+						</h:selectOneMenu>
+					</div>
+
+					<br />
+
+
+
+					<div class="box">
+						<p:outputLabel for="answer" value="Answer 1"
+							styleClass="col-fixed" style="width:400px"></p:outputLabel>
+						<p:inputText id="answer" required="true"
+							label="Please Enter answer" size="40"
+							requiredMessage="Please enter answer." value="#{provider.answer}">
+						</p:inputText>
+						<p:watermark for="answer" value="answer *" />
+						<br />
+						<h:message for="answer" style="color:red;" />
+					</div>
+					<br />
+					<div class="box">
+						<p:outputLabel value="Select Question 2: " />
+						<br />
+
+
+						<h:selectOneMenu id="question2" value="#{provider.question2}"
+							class="btn btn-light dropdown-toggle" type="button"
+							style="width:250px; border:2px solid skyblue; ">
+
+							<f:selectItems value="#{q2.questions2}" />
+						</h:selectOneMenu>
+					</div>
+					<br />
+					<div class="box">
+						<p:outputLabel for="answer2" value="Answer 2"
+							styleClass="col-fixed" style="width:400px"></p:outputLabel>
+						<p:inputText id="answer2" required="true"
+							label="Please Enter answer" size="40"
+							requiredMessage="Please enter answer."
+							value="#{provider.answer2}">
+						</p:inputText>
+						<p:watermark for="answer2" value="answer *" />
+						<br />
+						<h:message for="answer2" style="color:red;" />
+					</div>
+					<br />
+					<br />
+
+
+					<h:commandButton action="#{pDao.addProvider(provider)}"
+						class="btn btn-primary"
+						style="box-shadow: 5px 5px 10px 2px grey; width:150px;"
+						value="Submit"></h:commandButton>
+
+					<h:outputLink value="Login.xhtml" style=" margin-left:60px;">Already an user ?</h:outputLink>
+
+
+					<br />
+					<Br />
+					<br />
+
+
+
+				</p:panel>
+			</div>
+
+		</h:form>
+
+	</div>
+
+
+</h:body>
+<br />
+<br />
+<br />
+<div id="footer-container" style="background-color: black;">
+	<div id="footer">
+		<ui:insert name="footer">
+			<h:outputText style="color:white; margin-left:30px;"
+				value="Disclaimer | Accessibility Statement | Terms of use | Site Map"></h:outputText>
+			<h:outputText style="color:white; margin-left:330px;"
+				value="© 2023, Government of India, All rights reserved">
+			</h:outputText>
+		</ui:insert>
+	</div>
+</div>
+</html>

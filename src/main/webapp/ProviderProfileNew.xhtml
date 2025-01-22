@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+<h:head>
+	<script type="text/javascript">
+    window.history.forward();
+</script>
+	<style>
+.card {
+	padding-left: 60px;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	padding: 10px;
+	background-color: #fff;
+	border-radius: 5px;
+	margin-right: 450 px;
+	margin-left: 150px;
+	margin-top: 50px;
+}
+
+#headerText {
+	text-align: center;
+}
+
+#buttonDiv {
+	text-align: center;
+}
+
+#infoDiv {
+	text-align: center;
+}
+</style>
+
+</h:head>
+
+
+
+
+<h:body
+	style="background-image: url(#{request.contextPath}/images/02.jpg); 
+  background-repeat: no-repeat;height: 600px;
+  background-size:cover;">
+
+	<div id="header">
+		<ui:include src="Navbar.xhtml"></ui:include>
+	</div>
+	<div id="card">
+
+		<div>
+			<h1 id="headerText">Provider Profile</h1>
+		</div>
+		<h:form>
+			<div id="infoDiv">
+				<center>
+					<p:panelGrid id="panel" columns="2" cellpadding="15"
+						cellspacing="1">
+						<p:outputLabel value="Provider Id :" />
+						<p:outputLabel value="#{providerInfo.providerId}" />
+						<p:outputLabel value="Provider Name :" />
+						<p:outputLabel value="#{providerInfo.fristName}" />
+						<p:outputLabel value="Specialization :" />
+						<p:outputLabel value="#{providerInfo.specialization}" />
+						<p:outputLabel value="Mobile No :" />
+						<p:outputLabel value="#{providerInfo.phoneNo}" />
+						<p:outputLabel value="Email Id :" />
+						<p:outputLabel value="#{providerInfo.providerEmailId}" />
+					</p:panelGrid>
+				</center>
+			</div>
+			<br />
+		</h:form>
+		<h:form>
+
+			<div id="buttonDiv">
+				<p:commandButton value="LOGOUT" action="#{lDao.logout()}"
+					icon="pi pi-power-off" styleClass="ui-button-danger">
+					<p:confirm header="Confirmation"
+						message="Are you sure you want to logout?"
+						icon="pi pi-exclamation-triangle" />
+				</p:commandButton>
+				&nbsp;&nbsp;
+				<p:commandButton style=" border-radius:10px; "
+					action="changePassword.xhtml" value="CHANGE PASSWORD" ajax="false" />
+			</div>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+				responsive="true" width="350">
+				<p:commandButton value="No" type="button"
+					styleClass="ui-confirmdialog-no ui-button-flat" />
+				<p:commandButton value="Yes" type="button"
+					styleClass="ui-confirmdialog-yes" />
+			</p:confirmDialog>
+
+		</h:form>
+
+
+
+
+
+
+	</div>
+	<div>
+		<ui:include src="/Footer.xhtml" />
+	</div>
+
+</h:body>
+</html>
