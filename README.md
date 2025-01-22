@@ -1,2 +1,2 @@
-# This project is Heal care functionality demonstration
+# This project is Health Care functionality demonstration
 # Auther : Saurabh Kadam
